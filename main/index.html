@@ -1,48 +1,297 @@
-<!DOCTYPE HTML>
-<!--
-    Aerial by HTML5 UP
-    html5up.net | @ajlkn
-    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-    <head>
-        <title>My Site</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="assets/css/main.css" />
-        <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-        <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
-    </head>
-    <body class="is-preload">
-        <div id="wrapper">
-            <div id="bg"></div>
-            <div id="overlay"></div>
-            <div id="main">
-
-                <!-- Header -->
-                    <header id="header">
-                        <h1>Lox_so</h1>
-                        <p>Hannibot Developer &nbsp;&bull;&nbsp;Developer &bull;&nbsp; Node.js,Python,html and more..</p>
-                        <nav>
-                            <ul>
-                                <li><a href="https://discord.com/invite/8xZtuQ5rsr" class="icon brands fa-discord"><span class="label">Discord</span></a></li>
-                                <li><a href="https://github.com/hannibotdev" class="icon brands fa-github"><span class="label">Github</span></a></li>
-                                <li><a href="mailto:kimwinterwi@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-                            </ul>
-                        </nav>
-                    </header>
-
-                <!-- Footer -->
-                    <footer id="footer">
-                        <span class="copyright">&copy; Lox_so</span>
-                    </footer>
-
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome To my Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --bg-color: #0a0c10;
+            --text-color: #e6edf3;
+            --primary-color: #58a6ff;
+            --secondary-color: #1f6feb;
+            --accent-color: #238636;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            scroll-behavior: smooth;
+        }
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInHeader 2s ease-out;
+        }
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.discordapp.com/attachments/1222537919479287860/1268619898863616110/aespa-hot-mess-karina-winter-giselle-ningning-hd-wallpaper-uhdpaper.com-3440k.jpg?ex=66ad15d9&is=66abc459&hm=eb1715bf931fa55a0be11bcfdcea9bcb71f9ed4e320c2295af858b786448d91c&');
+            background-size: cover; 
+            background-position: center;
+            filter: brightness(0.3) blur(5px);
+            z-index: -1;
+        }
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            animation: fadeInDown 1.5s ease-out;
+        }
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1.5s ease-out 0.5s both;
+        }
+        .content {
+            padding: 4rem 0;
+            animation: fadeInContent 2s ease-out;
+        }
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+            animation: fadeInSection 1.5s ease-out;
+        }
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            position: relative;
+            animation: fadeInTitle 1.5s ease-out;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+        .section-title i {
+            margin-right: 15px;
+            font-size: 1.8rem;
+        }
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .skill {
+            background: var(--secondary-color);
+            color: var(--text-color);
+            padding: 0.7rem 1.2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            animation: fadeInSkill 2s ease-out;
+        }
+        .skill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(88, 166, 255, 0.4);
+        }
+        .skill i {
+            margin-right: 8px;
+        }
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .project {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            animation: fadeInProject 2s ease-out;
+        }
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(88, 166, 255, 0.2);
+        }
+        .project h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        .project i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+        @keyframes fadeInHeader {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInContent {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInSection {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInTitle {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInSkill {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInProject {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .scroll-down {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-bg"></div>
+        <h1>Lox_so</h1>
+        <p class="subtitle">Print("Hello World!")</p>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+    <div class="container">
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-user"></i> 소개</h2>
+                <p>Hello, I'm Lox_so, a bot Developer and creator of HanniBot. I'm mainly developing bots with html, javascript, Python, Discord.js, Py-cord, Node.js</p>    
+            </div>
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-laptop-code"></i> 기술 스택</h2>
+                <div class="skills">
+                    <div class="skill"><i class="fab fa-js"></i> JavaScript</div>
+                    <div class="skill"><i class="fab fa-node-js"></i> Node.js</div>
+                    <div class="skill"><i class="fab fa-python"></i> Python</div>
+                    <div class="skill"><i class="fab fa-html5"></i> HTML5</div>
+                    <div class="skill"><i class="fab fa-discord"></i> Discord.js</div>
+                </div>
+            </div>
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-project-diagram"></i> 프로젝트</h2>
+                <div class="projects">
+                    <div class="project">
+                        <i class="fas fa-music"></i>
+                        <h3>Sianbot v3 - 음악 스트리밍 봇</h3>
+                        <p>유튜브에서 음악을 가져와 재생하는 뮤직봇입니다.</p>
+                    </div>
+                    <div class="project">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Hannibot - 아이돌 정보 제공 봇</h3>
+                        <p>뉴진스의 정보와 특정 멤버의 정보를 제공합니다.</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <script>
-            window.onload = function() { document.body.classList.remove('is-preload'); }
-            window.ontouchmove = function() { return false; }
-            window.onorientationchange = function() { document.body.scrollTop = 0; }
-        </script>
-    </body>
+    </div>
+</body>
 </html>
