@@ -37,7 +37,6 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            animation: fadeInHeader 2s ease-out;
         }
         .header-bg {
             position: absolute;
@@ -46,7 +45,7 @@
             width: 100%;
             height: 100%;
             background-image: url('https://cdn.discordapp.com/attachments/1222537919479287860/1268619898863616110/aespa-hot-mess-karina-winter-giselle-ningning-hd-wallpaper-uhdpaper.com-3440k.jpg?ex=66ad15d9&is=66abc459&hm=eb1715bf931fa55a0be11bcfdcea9bcb71f9ed4e320c2295af858b786448d91c&');
-            background-size: cover; 
+            background-size: cover;
             background-position: center;
             filter: brightness(0.3) blur(5px);
             z-index: -1;
@@ -56,12 +55,46 @@
             font-weight: 700;
             margin-bottom: 1rem;
             letter-spacing: 2px;
-            animation: fadeInDown 1.5s ease-out;
+            animation: fadeInDown 1s ease-out;
         }
-        .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1.5s ease-out 0.5s both;
+        .greeting {
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--text-color);
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            position: relative;
+            padding: 0 0.5rem;
+            border-right: 0.15em solid var(--text-color); /* Cursor */
+            animation: blinkCursor 0.75s step-end infinite;
+        }
+        @keyframes blinkCursor {
+            50% { border-color: transparent; }
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes erase {
+            from { width: 100%; }
+            to { width: 0; }
+        }
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .scroll-down {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-30px); }
+            60% { transform: translateY(-15px); }
         }
         .content {
             padding: 4rem 0;
@@ -116,7 +149,7 @@
             display: flex;
             align-items: center;
             transition: all 0.3s ease;
-            animation: fadeInSkill 2s ease-out;
+            animation: fadeInSkill 1.5s ease-out;
         }
         .skill:hover {
             transform: translateY(-3px);
@@ -135,7 +168,7 @@
             padding: 1.5rem;
             border-radius: 10px;
             transition: all 0.3s ease;
-            animation: fadeInProject 2s ease-out;
+            animation: fadeInProject 1.5s ease-out;
         }
         .project:hover {
             transform: translateY(-5px);
@@ -150,16 +183,6 @@
             font-size: 2rem;
             margin-bottom: 1rem;
             color: var(--accent-color);
-        }
-        @keyframes fadeInHeader {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
         @keyframes fadeInDown {
             from {
@@ -231,31 +254,13 @@
                 transform: translateY(0);
             }
         }
-        .scroll-down {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-30px);
-            }
-            60% {
-                transform: translateY(-15px);
-            }
-        }
     </style>
 </head>
 <body>
     <header>
         <div class="header-bg"></div>
         <h1>Lox_so</h1>
-        <p class="subtitle">Print("Hello World!")</p>
+        <p class="greeting"></p>
         <div class="scroll-down">
             <i class="fas fa-chevron-down"></i>
         </div>
@@ -264,10 +269,10 @@
         <div class="content">
             <div class="section">
                 <h2 class="section-title"><i class="fas fa-user"></i> 소개</h2>
-                <p>Hello, I'm Lox_so, a bot Developer and creator of HanniBot. I'm mainly developing bots with html, javascript, Python, Discord.js, Py-cord, Node.js</p>    
+                <p>Hello, I'm Lox_so, a bot Developer and creator of HanniBot. I'm mainly developing bots with HTML, JavaScript, Python, Discord.js, Py-cord, Node.js.</p>    
             </div>
             <div class="section">
-                <h2 class="section-title"><i class="fas fa-laptop-code"></i> 기술 스택</h2>
+                <h2 class="section-title"><i class="fas fa-laptop-code"></i>스택</h2>
                 <div class="skills">
                     <div class="skill"><i class="fab fa-js"></i> JavaScript</div>
                     <div class="skill"><i class="fab fa-node-js"></i> Node.js</div>
@@ -293,5 +298,69 @@
             </div>
         </div>
     </div>
+    <script>
+        const greetings = [
+            "Hello!",
+            "Hola!",
+            "Bonjour!",
+            "Hallo!",
+            "Ciao!",
+            "こんにちは!",
+            "Bonjour!",
+            "Olá!",
+            "Merhaba!",
+            "안녕하세요!"
+        ];
+
+        const greetingElement = document.querySelector('.greeting');
+        let i = 0;
+        let typingSpeed = 80; // Typing speed (ms)
+        let eraseSpeed = 50; // Erasing speed (ms)
+        let pauseBetween = 300; // Pause between messages
+
+        function typeGreeting(text, callback) {
+            let charIndex = 0;
+            greetingElement.textContent = "";
+            greetingElement.style.animation = "none"; // Reset cursor animation
+            const typingInterval = setInterval(() => {
+                greetingElement.textContent += text.charAt(charIndex);
+                charIndex++;
+                if (charIndex > text.length) {
+                    clearInterval(typingInterval);
+                    setTimeout(() => {
+                        eraseGreeting(callback);
+                    }, pauseBetween); // Short pause before erasing
+                }
+            }, typingSpeed);
+        }
+
+        function eraseGreeting(callback) {
+            const erasingInterval = setInterval(() => {
+                greetingElement.textContent = greetingElement.textContent.slice(0, -1);
+                if (greetingElement.textContent.length === 0) {
+                    clearInterval(erasingInterval);
+                    callback();
+                }
+            }, eraseSpeed);
+        }
+
+        function changeGreeting() {
+            if (i < greetings.length) {
+                if (greetings[i] === "안녕하세요!") {
+                    greetingElement.textContent = "안녕하세요!";
+                    greetingElement.style.animation = "True"; // Disable cursor animation
+                    return; // Stop further processing
+                } else {
+                    typeGreeting(greetings[i], () => {
+                        i++;
+                        changeGreeting(); // Recursive call to continue
+                    });
+                }
+            }
+        }
+
+        // Start changing greetings
+        changeGreeting();
+    </script>
 </body>
 </html>
