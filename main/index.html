@@ -366,7 +366,7 @@
                         <h3>Sianbot v3</h3>
                         <p>A music streaming bot that plays music from YouTube.</p>
                         <p class="subtext">유튜브에서 음악을 가져와 재생하는 뮤직봇입니다.</p>
-                    </div>
+                    </div>    
                     <div class="project">
                         <i class="fas fa-info-circle"></i>
                         <h3>Hannibot</h3>
@@ -387,7 +387,11 @@
     <div class="language-toggle">
         <i class="fas fa-globe"></i>
     </div>
-
+ <!-- Link added to language-toggle -->
+    <a href="https://example.com" class="language-toggle" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-globe"></i>
+    </a>
+    
     <script>
         const themeToggle = document.querySelector('.theme-toggle');
         const currentTheme = localStorage.getItem('theme') || 'dark';
@@ -398,7 +402,7 @@
                 themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
             }
         }
-
+       
         themeToggle.addEventListener('click', () => {
             let theme = document.documentElement.getAttribute('data-theme');
             if (theme === 'dark') {
