@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lox_so's Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
         
@@ -20,16 +20,18 @@
         }
 
         [data-theme="light"] {
-    --bg-color: #ffffff; /* 배경 색상: 흰색 */
-    --text-color: #24292e; /* 본문 텍스트 색상 */
-    --primary-color: #000000; /* 주요 색상: 검은색 */
-    --secondary-color: #000000; /* 보조 색상: 검은색 */
-    --accent-color: #28a745; /* 강조 색상 (예: 버튼 등) */
-    --section-bg: rgba(0, 0, 0, 0.05); /* 섹션 배경: 연한 검은색 */
-    --highlight-color: #000000; /* 하이라이트 색상: 검은색 */
-    --subtext-color: #6c757d; /* 부가 텍스트 색상 */
-    --arrow-color: #000000; /* 화살표 색상: 검은색 */
-}
+            --bg-color: #ffffff; /* 배경 색상: 흰색 */
+            --text-color: #24292e; /* 본문 텍스트 색상 */
+            --primary-color: #000000; /* 주요 색상: 검은색 */
+            --secondary-color: #000000; /* 보조 색상: 검은색 */
+            --accent-color: #28a745; /* 강조 색상 (예: 버튼 등) */
+            --section-bg: rgba(0, 0, 0, 0.05); /* 섹션 배경: 연한 검은색 */
+            --highlight-color: #000000; /* 하이라이트 색상: 검은색 */
+            --subtext-color: #6c757d; /* 부가 텍스트 색상 */
+            --arrow-color: #000000; /* 화살표 색상: 검은색 */
+        }
+
+        /* General styling */
         * {
             margin: 0;
             padding: 0;
@@ -296,38 +298,37 @@
             margin-top: 0.5rem;
         }
         footer {
-    background: none; /* 배경을 제거 */
-    color: var(--subtext-color); /* 기본 텍스트 색상 */
-    padding: 1rem 0;
-    text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 3rem;
-    position: relative;
-    animation: fadeIn 2s ease-out; /* 서서히 나타나는 애니메이션 */
-}
+            background: var(--bg-color); /* Ensure contrast with text */
+            color: var(--subtext-color);
+            padding: 1rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+            position: relative;
+            animation: fadeIn 2s ease-out;
+        }
 
-footer p {
-    margin: 0;
-    font-size: 0.9rem;
-    animation: bounceText 1s ease-in-out infinite; /* 튕기는 애니메이션 */
-}
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            animation: bounceText 1s ease-in-out infinite;
+        }
 
-/* 텍스트 애니메이션 */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-@keyframes bounceText {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
+        @keyframes bounceText {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
     </style>
 </head>
 <body>
@@ -380,9 +381,11 @@ footer p {
         </footer>        
     </div>
 
-    
     <div class="theme-toggle">
         <i class="fas fa-moon"></i>
+    </div>
+    <div class="language-toggle">
+        <i class="fas fa-globe"></i>
     </div>
 
     <script>
