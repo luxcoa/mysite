@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome To my Page</title>
+    <title>Lox_so's Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
@@ -28,6 +28,11 @@
             background-color: var(--bg-color);
             scroll-behavior: smooth;
         }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
         header {
             height: 100vh;
             display: flex;
@@ -49,6 +54,11 @@
             background-position: center;
             filter: brightness(0.3) blur(5px);
             z-index: -1;
+            animation: zoomEffect 20s infinite alternate;
+        }
+        @keyframes zoomEffect {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
         }
         h1 {
             font-size: 4rem;
@@ -66,23 +76,11 @@
             display: inline-block;
             position: relative;
             padding: 0 0.5rem;
-            border-right: 0.15em solid var(--text-color); /* Cursor */
+            border-right: 0.15em solid var(--text-color);
             animation: blinkCursor 0.75s step-end infinite;
         }
         @keyframes blinkCursor {
             50% { border-color: transparent; }
-        }
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        @keyframes erase {
-            from { width: 100%; }
-            to { width: 0; }
-        }
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
         }
         .scroll-down {
             position: absolute;
@@ -90,15 +88,19 @@
             left: 50%;
             transform: translateX(-50%);
             animation: bounce 2s infinite;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        .scroll-down:hover {
+            opacity: 0.7;
         }
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-30px); }
-            60% { transform: translateY(-15px); }
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-30px) translateX(-50%); }
+            60% { transform: translateY(-15px) translateX(-50%); }
         }
         .content {
             padding: 4rem 0;
-            animation: fadeInContent 2s ease-out;
         }
         .section {
             background: rgba(255, 255, 255, 0.05);
@@ -107,7 +109,13 @@
             margin-bottom: 3rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             backdrop-filter: blur(10px);
-            animation: fadeInSection 1.5s ease-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
         .section:hover {
             transform: translateY(-5px);
@@ -120,7 +128,6 @@
             display: flex;
             align-items: center;
             position: relative;
-            animation: fadeInTitle 1.5s ease-out;
         }
         .section-title::after {
             content: '';
@@ -130,6 +137,10 @@
             width: 50px;
             height: 3px;
             background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        .section:hover .section-title::after {
+            width: 100px;
         }
         .section-title i {
             margin-right: 15px;
@@ -149,7 +160,13 @@
             display: flex;
             align-items: center;
             transition: all 0.3s ease;
-            animation: fadeInSkill 1.5s ease-out;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        .skill.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
         .skill:hover {
             transform: translateY(-3px);
@@ -168,7 +185,13 @@
             padding: 1.5rem;
             border-radius: 10px;
             transition: all 0.3s ease;
-            animation: fadeInProject 1.5s ease-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .project.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
         .project:hover {
             transform: translateY(-5px);
@@ -194,66 +217,6 @@
                 transform: translateY(0);
             }
         }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes fadeInContent {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes fadeInSection {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes fadeInTitle {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes fadeInSkill {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes fadeInProject {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
     </style>
 </head>
 <body>
@@ -272,7 +235,7 @@
                 <p>Hello, I'm Lox_so, a bot Developer and creator of HanniBot. I'm mainly developing bots with HTML, JavaScript, Python, Discord.js, Py-cord, Node.js.</p>    
             </div>
             <div class="section">
-                <h2 class="section-title"><i class="fas fa-laptop-code"></i>스택</h2>
+                <h2 class="section-title"><i class="fas fa-laptop-code"></i> 스택</h2>
                 <div class="skills">
                     <div class="skill"><i class="fab fa-js"></i> JavaScript</div>
                     <div class="skill"><i class="fab fa-node-js"></i> Node.js</div>
@@ -314,14 +277,14 @@
 
         const greetingElement = document.querySelector('.greeting');
         let i = 0;
-        let typingSpeed = 80; // Typing speed (ms)
-        let eraseSpeed = 50; // Erasing speed (ms)
-        let pauseBetween = 300; // Pause between messages
+        let typingSpeed = 80;
+        let eraseSpeed = 50;
+        let pauseBetween = 1000;
 
         function typeGreeting(text, callback) {
             let charIndex = 0;
             greetingElement.textContent = "";
-            greetingElement.style.animation = "none"; // Reset cursor animation
+            greetingElement.style.animation = "none";
             const typingInterval = setInterval(() => {
                 greetingElement.textContent += text.charAt(charIndex);
                 charIndex++;
@@ -329,7 +292,7 @@
                     clearInterval(typingInterval);
                     setTimeout(() => {
                         eraseGreeting(callback);
-                    }, pauseBetween); // Short pause before erasing
+                    }, pauseBetween);
                 }
             }, typingSpeed);
         }
@@ -345,22 +308,46 @@
         }
 
         function changeGreeting() {
-            if (i < greetings.length) {
-                if (greetings[i] === "안녕하세요!") {
-                    greetingElement.textContent = "안녕하세요!";
-                    greetingElement.style.animation = "True"; // Disable cursor animation
-                    return; // Stop further processing
-                } else {
-                    typeGreeting(greetings[i], () => {
-                        i++;
-                        changeGreeting(); // Recursive call to continue
-                    });
-                }
-            }
+            typeGreeting(greetings[i], () => {
+                i = (i + 1) % greetings.length;
+                changeGreeting();
+            });
         }
 
-        // Start changing greetings
         changeGreeting();
+
+        document.querySelector('.scroll-down').addEventListener('click', () => {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        });
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    if (entry.target.classList.contains('skills')) {
+                        entry.target.querySelectorAll('.skill').forEach((skill, index) => {
+                            setTimeout(() => {
+                                skill.classList.add('visible');
+                            }, index * 100);
+                        });
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .project, .skills').forEach(el => {
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>
