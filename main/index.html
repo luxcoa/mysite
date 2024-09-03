@@ -15,7 +15,7 @@
             --primary-color: #58a6ff;
             --secondary-color: #1f6feb;
             --accent-color: #238636;
-            --section-bg: rgba(255, 255, 255, 0.05);
+            --section-bg: rgba(255, 255, 255, 0.08); /* 대비를 높임 */
             --arrow-color: #ffffff;
         }
 
@@ -25,7 +25,7 @@
             --primary-color: #000000;
             --secondary-color: #000000;
             --accent-color: #28a745;
-            --section-bg: rgba(0, 0, 0, 0.05);
+            --section-bg: rgba(0, 0, 0, 0.08);
             --highlight-color: #000000;
             --subtext-color: #6c757d;
             --arrow-color: #000000;
@@ -36,6 +36,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body, html {
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
@@ -44,11 +45,13 @@
             scroll-behavior: smooth;
             transition: background-color 0.5s ease, color 0.5s ease;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
         }
+
         header {
             height: 100vh;
             display: flex;
@@ -59,6 +62,7 @@
             position: relative;
             overflow: hidden;
         }
+
         .header-bg {
             position: absolute;
             top: 0;
@@ -68,27 +72,30 @@
             background-image: url('https://cdn.discordapp.com/attachments/1222537919479287860/1268619898863616110/aespa-hot-mess-karina-winter-giselle-ningning-hd-wallpaper-uhdpaper.com-3440k.jpg?ex=66ad15d9&is=66abc459&hm=eb1715bf931fa55a0be11bcfdcea9bcb71f9ed4e320c2295af858b786448d91c&');
             background-size: cover;
             background-position: center;
-            filter: brightness(0.2) blur(3px);
+            filter: brightness(0.3) blur(5px);
             z-index: -1;
             animation: zoomEffect 20s infinite alternate;
             transition: filter 0.5s ease;
         }
+
         [data-theme="light"] .header-bg {
-            filter: brightness(0.7) blur(3px);
+            filter: brightness(0.7) blur(5px);
         }
+
         @keyframes zoomEffect {
             0% { transform: scale(1); }
             100% { transform: scale(1.1); }
         }
+
         h1 {
-            font-size: 4rem;
+            font-size: 3.5rem; /* 폰트 크기 조정 */
             font-weight: 700;
             margin-bottom: 1rem;
             letter-spacing: 2px;
-            animation: fadeInDown 1.2s ease-out;
+            animation: fadeInDown 1s ease-out;
             color: var(--highlight-color);
-            text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
         }
+
         .greeting {
             font-size: 2rem;
             font-weight: 500;
@@ -101,9 +108,11 @@
             border-right: 0.15em solid var(--text-color);
             animation: blinkCursor 0.75s step-end infinite;
         }
+
         @keyframes blinkCursor {
             50% { border-color: transparent; }
         }
+
         .scroll-down {
             position: absolute;
             bottom: 20px;
@@ -112,19 +121,23 @@
             animation: bounce 2s infinite;
             cursor: pointer;
             transition: opacity 0.3s ease;
-            color: var(--arrow-color); 
+            color: var(--arrow-color);
         }
+
         .scroll-down:hover {
             opacity: 0.7;
         }
+
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
             40% { transform: translateY(-30px) translateX(-50%); }
             60% { transform: translateY(-15px) translateX(-50%); }
         }
+
         .content {
             padding: 4rem 0;
         }
+
         .section {
             background: var(--section-bg);
             padding: 2rem;
@@ -133,36 +146,29 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease;
             backdrop-filter: blur(10px);
             opacity: 0;
-            transform: translateY(30px);
-            animation: slideUp 0.8s ease-out;
+            transform: translateY(20px);
         }
-        @keyframes slideUp {
-            from {
-                transform: translateY(30px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
+
         .section.visible {
             opacity: 1;
             transform: translateY(0);
             transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
+
         .section:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25); /* 그림자 더 강조 */
         }
+
         .section-title {
-            font-size: 2rem;
+            font-size: 1.8rem; /* 폰트 크기 조정 */
             color: var(--primary-color);
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             position: relative;
         }
+
         .section-title::after {
             content: '';
             position: absolute;
@@ -173,18 +179,22 @@
             background: var(--primary-color);
             transition: width 0.3s ease;
         }
+
         .section:hover .section-title::after {
             width: 100px;
         }
+
         .section-title i {
             margin-right: 15px;
-            font-size: 1.8rem;
+            font-size: 1.6rem; /* 폰트 크기 조정 */
         }
+
         .skills {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
         }
+
         .skill {
             background: var(--secondary-color);
             color: #ffffff;
@@ -197,23 +207,28 @@
             opacity: 0;
             transform: translateY(10px);
         }
+
         .skill.visible {
             opacity: 1;
             transform: translateY(0);
             transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
+
         .skill:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(88, 166, 255, 0.4);
         }
+
         .skill i {
             margin-right: 8px;
         }
+
         .projects {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
+
         .project {
             background: var(--section-bg);
             padding: 1.5rem;
@@ -222,176 +237,161 @@
             opacity: 0;
             transform: translateY(20px);
         }
+
         .project.visible {
             opacity: 1;
             transform: translateY(0);
             transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
+
         .project:hover {
-            transform: rotateY(10deg) translateY(-5px); /* 3D 회전 효과 */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform: translateY(-7px);
+            box-shadow: 0 12px 30px rgba(88, 166, 255, 0.3); /* 그림자 더 강조 */
         }
+
         .project h3 {
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
             color: var(--primary-color);
+            margin-bottom: 1rem;
         }
+
         .project p {
             color: var(--subtext-color);
+            line-height: 1.5;
         }
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            background: var(--bg-color);
-            color: var(--subtext-color);
-            font-size: 0.9rem;
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            background: var(--primary-color);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
-        footer p {
-            margin: 0;
-            animation: bounceText 2s ease-in-out infinite;
+
+        .btn:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
         }
-        footer .socials {
-            margin-top: 1rem;
-        }
-        footer .socials a {
-            margin: 0 10px;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            transition: color 0.3s ease;
-        }
-        footer .socials a:hover {
-            color: var(--secondary-color);
-        }
-        .theme-toggle {
+
+        .toggle-buttons {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: var(--bg-color);
-            border: 2px solid var(--primary-color);
-            border-radius: 50%;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .toggle-buttons button {
+            background: var(--section-bg);
+            border: none;
             padding: 0.5rem;
+            border-radius: 50%;
             cursor: pointer;
-            transition: transform 0.3s ease;
-            z-index: 1000;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* 그림자 추가 */
         }
-        .theme-toggle i {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-        }
-        .theme-toggle:hover {
-            transform: scale(1.1);
+
+        .toggle-buttons button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강조 */
         }
     </style>
 </head>
 <body>
     <header>
         <div class="header-bg"></div>
-        <div class="container">
-            <h1>Welcome to Lox_so's Portfolio</h1>
-            <p class="greeting">Hello, I'm a passionate developer!</p>
-            <div class="scroll-down">
-                <i class="fas fa-arrow-down fa-2x"></i>
-            </div>
-        </div>
+        <h1>Lox_so</h1>
+        <p class="greeting">Welcome to my portfolio!</p>
+        <a href="#about" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
     </header>
 
-    <section class="content container">
-        <div class="section" id="about">
-            <h2 class="section-title"><i class="fas fa-user"></i> About Me</h2>
-            <p>Hello! I'm a full-stack developer with a passion for creating innovative solutions. My goal is to build responsive, user-friendly applications that make a difference.</p>
-        </div>
+    <div class="container content">
+        <section id="about" class="section">
+            <h2 class="section-title"><i class="fas fa-user"></i>About Me</h2>
+            <p>Hello! I'm Lox_so, a passionate developer who loves coding and creating innovative solutions. Welcome to my portfolio where you can see my skills and projects.</p>
+        </section>
 
-        <div class="section" id="skills">
-            <h2 class="section-title"><i class="fas fa-tools"></i> Skills</h2>
+        <section id="skills" class="section">
+            <h2 class="section-title"><i class="fas fa-code"></i>Skills</h2>
             <div class="skills">
-                <div class="skill"><i class="fab fa-html5"></i> HTML</div>
-                <div class="skill"><i class="fab fa-css3-alt"></i> CSS</div>
-                <div class="skill"><i class="fab fa-js"></i> JavaScript</div>
-                <div class="skill"><i class="fab fa-react"></i> React</div>
-                <div class="skill"><i class="fab fa-node"></i> Node.js</div>
-                <div class="skill"><i class="fab fa-python"></i> Python</div>
+                <div class="skill"><i class="fab fa-html5"></i>HTML</div>
+                <div class="skill"><i class="fab fa-css3-alt"></i>CSS</div>
+                <div class="skill"><i class="fab fa-js"></i>JavaScript</div>
+                <div class="skill"><i class="fab fa-react"></i>React</div>
+                <div class="skill"><i class="fab fa-node"></i>Node.js</div>
+                <div class="skill"><i class="fab fa-python"></i>Python</div>
             </div>
-        </div>
+        </section>
 
-        <div class="section" id="projects">
-            <h2 class="section-title"><i class="fas fa-code"></i> Projects</h2>
+        <section id="projects" class="section">
+            <h2 class="section-title"><i class="fas fa-project-diagram"></i>Projects</h2>
             <div class="projects">
                 <div class="project">
-                    <h3>Project 1: Chatbot Platform</h3>
-                    <p>A comprehensive chatbot platform developed using JavaScript and Node.js, enabling businesses to easily create and deploy custom chatbots. The platform features a user-friendly interface, real-time analytics, and integration with multiple messaging services.</p>
+                    <h3>Project 1</h3>
+                    <p>This is a description of Project 1. It showcases my ability to build amazing things with technology.</p>
+                    <a href="#" class="btn">View More</a>
                 </div>
                 <div class="project">
-                    <h3>Project 2: Image Recognition Tool</h3>
-                    <p>An image recognition tool built with Python and TensorFlow, designed to classify and tag images automatically. This tool can be integrated into various applications, such as automated content moderation or object detection in real-time video feeds.</p>
+                    <h3>Project 2</h3>
+                    <p>This is a description of Project 2. It highlights my skills in front-end development and design.</p>
+                    <a href="#" class="btn">View More</a>
                 </div>
                 <div class="project">
-                    <h3>Project 3: Personal Portfolio</h3>
-                    <p>This very portfolio website, showcasing skills and projects, built with HTML, CSS, and JavaScript. It features a responsive design, smooth scrolling, and theme toggling between dark and light modes.</p>
+                    <h3>Project 3</h3>
+                    <p>This is a description of Project 3. It demonstrates my expertise in back-end development and databases.</p>
+                    <a href="#" class="btn">View More</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <footer>
-        <p>&copy; 2024 Lox_so. All Rights Reserved.</p>
-        <div class="socials">
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-        </div>
-    </footer>
-
-    <div class="theme-toggle" onclick="toggleTheme()">
-        <i class="fas fa-adjust"></i>
+    <div class="toggle-buttons">
+        <button id="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+        <button id="language-toggle">
+            <i class="fas fa-language"></i>
+        </button>
     </div>
 
     <script>
-        const themeToggle = document.querySelector('.theme-toggle');
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-
-        document.documentElement.setAttribute('data-theme', currentTheme);
-
-        function toggleTheme() {
-            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        }
-
-        // Scroll Animation
-        const sections = document.querySelectorAll('.section');
-        const skills = document.querySelectorAll('.skill');
-        const projects = document.querySelectorAll('.project');
-
-        window.addEventListener('scroll', checkSections);
-
-        function checkSections() {
-            const triggerBottom = window.innerHeight / 5 * 4;
-            
-            sections.forEach(section => {
-                const sectionTop = section.getBoundingClientRect().top;
-                
-                if (sectionTop < triggerBottom) {
-                    section.classList.add('visible');
-                }
+        document.addEventListener('DOMContentLoaded', function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
             });
 
-            skills.forEach(skill => {
-                const skillTop = skill.getBoundingClientRect().top;
-                
-                if (skillTop < triggerBottom) {
-                    skill.classList.add('visible');
-                }
+            document.querySelectorAll('.section, .skill, .project').forEach(element => {
+                observer.observe(element);
             });
 
-            projects.forEach(project => {
-                const projectTop = project.getBoundingClientRect().top;
-                
-                if (projectTop < triggerBottom) {
-                    project.classList.add('visible');
-                }
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const languageToggleBtn = document.getElementById('language-toggle');
+            const htmlElement = document.documentElement;
+
+            themeToggleBtn.addEventListener('click', function () {
+                const currentTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                htmlElement.setAttribute('data-theme', newTheme);
             });
-        }
+
+            languageToggleBtn.addEventListener('click', function () {
+                const currentLang = htmlElement.getAttribute('lang');
+                const newLang = currentLang === 'ko' ? 'en' : 'ko';
+                htmlElement.setAttribute('lang', newLang);
+            });
+        });
     </script>
 </body>
 </html>
