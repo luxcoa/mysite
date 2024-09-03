@@ -15,28 +15,28 @@
             --primary-color: #58a6ff;
             --secondary-color: #1f6feb;
             --accent-color: #238636;
-            --section-bg: rgba(255, 255, 255, 0.08); /* 대비를 높임 */
-            --arrow-color: #ffffff;
+            --section-bg: rgba(255, 255, 255, 0.05);
+            --arrow-color: #ffffff; /* 기본 화살표 색상 */
         }
 
         [data-theme="light"] {
-            --bg-color: #ffffff;
-            --text-color: #24292e;
-            --primary-color: #000000;
-            --secondary-color: #000000;
-            --accent-color: #28a745;
-            --section-bg: rgba(0, 0, 0, 0.08);
-            --highlight-color: #000000;
-            --subtext-color: #6c757d;
-            --arrow-color: #000000;
+            --bg-color: #ffffff; /* 배경 색상: 흰색 */
+            --text-color: #24292e; /* 본문 텍스트 색상 */
+            --primary-color: #000000; /* 주요 색상: 검은색 */
+            --secondary-color: #000000; /* 보조 색상: 검은색 */
+            --accent-color: #28a745; /* 강조 색상 (예: 버튼 등) */
+            --section-bg: rgba(0, 0, 0, 0.05); /* 섹션 배경: 연한 검은색 */
+            --highlight-color: #000000; /* 하이라이트 색상: 검은색 */
+            --subtext-color: #6c757d; /* 부가 텍스트 색상 */
+            --arrow-color: #000000; /* 화살표 색상: 검은색 */
         }
 
+        /* General styling */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body, html {
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
@@ -45,13 +45,11 @@
             scroll-behavior: smooth;
             transition: background-color 0.5s ease, color 0.5s ease;
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
         }
-
         header {
             height: 100vh;
             display: flex;
@@ -62,7 +60,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .header-bg {
             position: absolute;
             top: 0;
@@ -77,25 +74,21 @@
             animation: zoomEffect 20s infinite alternate;
             transition: filter 0.5s ease;
         }
-
         [data-theme="light"] .header-bg {
             filter: brightness(0.7) blur(5px);
         }
-
         @keyframes zoomEffect {
             0% { transform: scale(1); }
             100% { transform: scale(1.1); }
         }
-
         h1 {
-            font-size: 3.5rem; /* 폰트 크기 조정 */
+            font-size: 4rem;
             font-weight: 700;
             margin-bottom: 1rem;
             letter-spacing: 2px;
             animation: fadeInDown 1s ease-out;
             color: var(--highlight-color);
         }
-
         .greeting {
             font-size: 2rem;
             font-weight: 500;
@@ -108,11 +101,9 @@
             border-right: 0.15em solid var(--text-color);
             animation: blinkCursor 0.75s step-end infinite;
         }
-
         @keyframes blinkCursor {
             50% { border-color: transparent; }
         }
-
         .scroll-down {
             position: absolute;
             bottom: 20px;
@@ -121,23 +112,19 @@
             animation: bounce 2s infinite;
             cursor: pointer;
             transition: opacity 0.3s ease;
-            color: var(--arrow-color);
+            color: var(--arrow-color); /* 화살표 색상 */
         }
-
         .scroll-down:hover {
             opacity: 0.7;
         }
-
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
             40% { transform: translateY(-30px) translateX(-50%); }
             60% { transform: translateY(-15px) translateX(-50%); }
         }
-
         .content {
             padding: 4rem 0;
         }
-
         .section {
             background: var(--section-bg);
             padding: 2rem;
@@ -148,27 +135,23 @@
             opacity: 0;
             transform: translateY(20px);
         }
-
         .section.visible {
             opacity: 1;
             transform: translateY(0);
             transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
-
         .section:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25); /* 그림자 더 강조 */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
-
         .section-title {
-            font-size: 1.8rem; /* 폰트 크기 조정 */
+            font-size: 2rem;
             color: var(--primary-color);
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             position: relative;
         }
-
         .section-title::after {
             content: '';
             position: absolute;
@@ -179,22 +162,18 @@
             background: var(--primary-color);
             transition: width 0.3s ease;
         }
-
         .section:hover .section-title::after {
             width: 100px;
         }
-
         .section-title i {
             margin-right: 15px;
-            font-size: 1.6rem; /* 폰트 크기 조정 */
+            font-size: 1.8rem;
         }
-
         .skills {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
         }
-
         .skill {
             background: var(--secondary-color);
             color: #ffffff;
@@ -207,28 +186,23 @@
             opacity: 0;
             transform: translateY(10px);
         }
-
         .skill.visible {
             opacity: 1;
             transform: translateY(0);
             transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
-
         .skill:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(88, 166, 255, 0.4);
         }
-
         .skill i {
             margin-right: 8px;
         }
-
         .projects {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
-
         .project {
             background: var(--section-bg);
             padding: 1.5rem;
@@ -237,160 +211,238 @@
             opacity: 0;
             transform: translateY(20px);
         }
-
         .project.visible {
             opacity: 1;
             transform: translateY(0);
             transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
-
         .project:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 12px 30px rgba(88, 166, 255, 0.3); /* 그림자 더 강조 */
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(88, 166, 255, 0.2);
         }
-
         .project h3 {
             color: var(--primary-color);
             margin-bottom: 1rem;
+            font-size: 1.3rem;
         }
-
-        .project p {
-            color: var(--subtext-color);
-            line-height: 1.5;
+        .project i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
         }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            background: var(--primary-color);
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-
-        .btn:hover {
-            background: var(--accent-color);
-            transform: translateY(-3px);
-        }
-
-        .toggle-buttons {
+        .theme-toggle {
             position: fixed;
             top: 20px;
             right: 20px;
-            display: flex;
-            gap: 1rem;
-        }
-
-        .toggle-buttons button {
+            z-index: 1000;
             background: var(--section-bg);
-            border: none;
-            padding: 0.5rem;
             border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: background 0.3s ease;
+        }
+        .theme-toggle:hover {
+            background: var(--primary-color);
+        }
+        .theme-toggle i {
             color: var(--text-color);
-            font-size: 1.2rem;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* 그림자 추가 */
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        [data-theme="light"] .theme-toggle i {
+            color: #000000;
+        }
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--section-bg);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .language-toggle:hover {
+            background: var(--primary-color);
+        }
+        .language-toggle i {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        [data-theme="light"] .language-toggle i {
+            color: #000000;
+        }
+        .subtext {
+            font-size: 0.8rem;
+            color: var(--subtext-color);
+            margin-top: 0.5rem;
+        }
+        footer {
+            background: var(--bg-color); /* Ensure contrast with text */
+            color: var(--subtext-color);
+            padding: 1rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+            position: relative;
+            animation: fadeIn 2s ease-out;
         }
 
-        .toggle-buttons button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* 호버 시 그림자 강조 */
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            animation: bounceText 1s ease-in-out infinite;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceText {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="header-bg"></div>
-        <h1>Lox_so</h1>
-        <p class="greeting">Welcome to my portfolio!</p>
-        <a href="#about" class="scroll-down">
-            <i class="fas fa-chevron-down"></i>
-        </a>
+        <h1 class="greeting">Hello, I'm Lox_so</h1>
+        <p>Welcome to my portfolio.</p>
+        <a href="#content" class="scroll-down"><i class="fas fa-arrow-down"></i></a>
     </header>
 
-    <div class="container content">
-        <section id="about" class="section">
-            <h2 class="section-title"><i class="fas fa-user"></i>About Me</h2>
-            <p>Hello! I'm Lox_so, a passionate developer who loves coding and creating innovative solutions. Welcome to my portfolio where you can see my skills and projects.</p>
-        </section>
+    <div class="container">
+        <div id="content" class="content">
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-user"></i> About Me</h2>
+                <p>Hello, I'm Lox_so. I'm the developer of HanniBot and a bot developer with expertise in HTML, JavaScript, Python, Discord.js, Py-cord, and Node.js.</p>
+                <p class="subtext">안녕하세요, 저는 Lox_so입니다. HanniBot의 개발자이자 봇 개발자입니다. 주로 HTML, JavaScript, Python, Discord.js, Py-cord, Node.js를 사용하여 봇을 개발합니다.</p>
+            </section>
 
-        <section id="skills" class="section">
-            <h2 class="section-title"><i class="fas fa-code"></i>Skills</h2>
-            <div class="skills">
-                <div class="skill"><i class="fab fa-html5"></i>HTML</div>
-                <div class="skill"><i class="fab fa-css3-alt"></i>CSS</div>
-                <div class="skill"><i class="fab fa-js"></i>JavaScript</div>
-                <div class="skill"><i class="fab fa-react"></i>React</div>
-                <div class="skill"><i class="fab fa-node"></i>Node.js</div>
-                <div class="skill"><i class="fab fa-python"></i>Python</div>
-            </div>
-        </section>
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-code"></i> Tech Stack</h2>
+                <div class="skills">
+                    <div class="skill"><i class="fab fa-js-square"></i> JavaScript</div>
+                    <div class="skill"><i class="fab fa-node-js"></i> Node.js</div>
+                    <div class="skill"><i class="fab fa-python"></i> Python</div>
+                    <div class="skill"><i class="fab fa-html5"></i> HTML5</div>
+                    <div class="skill"><i class="fab fa-discord"></i> Discord.js</div>
+                </div>
+            </section>
 
-        <section id="projects" class="section">
-            <h2 class="section-title"><i class="fas fa-project-diagram"></i>Projects</h2>
-            <div class="projects">
-                <div class="project">
-                    <h3>Project 1</h3>
-                    <p>This is a description of Project 1. It showcases my ability to build amazing things with technology.</p>
-                    <a href="#" class="btn">View More</a>
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-robot"></i> Projects</h2>
+                <div class="projects">
+                    <div class="project">
+                        <i class="fas fa-music"></i>
+                        <h3>Sianbot v3</h3>
+                        <p>A music streaming bot that plays music from YouTube.</p>
+                        <p class="subtext">유튜브에서 음악을 가져와 재생하는 뮤직봇입니다.</p>
+                    </div>    
+                    <div class="project">
+                        <i class="fas fa-info-circle"></i>
+                        <h3>Hannibot</h3>
+                        <p>A bot that provides information about NewJeans and its members.</p>
+                        <p class="subtext">뉴진스의 정보와 특정 멤버의 정보를 제공하는 봇입니다.</p>
+                    </div>
                 </div>
-                <div class="project">
-                    <h3>Project 2</h3>
-                    <p>This is a description of Project 2. It highlights my skills in front-end development and design.</p>
-                    <a href="#" class="btn">View More</a>
-                </div>
-                <div class="project">
-                    <h3>Project 3</h3>
-                    <p>This is a description of Project 3. It demonstrates my expertise in back-end development and databases.</p>
-                    <a href="#" class="btn">View More</a>
-                </div>
-            </div>
-        </section>
+            </section>
+        </div>
+        <footer>
+            <p>&copy; 2024 Lox_so. All rights reserved.</p>
+        </footer>        
     </div>
 
-    <div class="toggle-buttons">
-        <button id="theme-toggle">
-            <i class="fas fa-moon"></i>
-        </button>
-        <button id="language-toggle">
-            <i class="fas fa-language"></i>
-        </button>
+    <div class="theme-toggle">
+        <i class="fas fa-moon"></i>
     </div>
-
+    <div class="language-toggle">
+        <i class="fas fa-globe"></i>
+    </div>
+ <!-- Link added to language-toggle -->
+    <a href="https://hannibot.netlify.app" class="language-toggle" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-globe"></i>
+    </a>
+    
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
+        const themeToggle = document.querySelector('.theme-toggle');
+        const currentTheme = localStorage.getItem('theme') || 'dark';
 
-            document.querySelectorAll('.section, .skill, .project').forEach(element => {
-                observer.observe(element);
-            });
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'light') {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+       
+        themeToggle.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
 
-            const themeToggleBtn = document.getElementById('theme-toggle');
-            const languageToggleBtn = document.getElementById('language-toggle');
-            const htmlElement = document.documentElement;
+        const sections = document.querySelectorAll('.section');
+        const skills = document.querySelectorAll('.skill');
+        const projects = document.querySelectorAll('.project');
 
-            themeToggleBtn.addEventListener('click', function () {
-                const currentTheme = htmlElement.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                htmlElement.setAttribute('data-theme', newTheme);
+        const showSection = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
             });
+        };
 
-            languageToggleBtn.addEventListener('click', function () {
-                const currentLang = htmlElement.getAttribute('lang');
-                const newLang = currentLang === 'ko' ? 'en' : 'ko';
-                htmlElement.setAttribute('lang', newLang);
-            });
+        const observer = new IntersectionObserver(showSection, {
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        skills.forEach(skill => {
+            observer.observe(skill);
+        });
+
+        projects.forEach(project => {
+            observer.observe(project);
         });
     </script>
 </body>
