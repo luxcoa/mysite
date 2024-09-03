@@ -1,3 +1,5 @@
+
+나의 말:
 <!DOCTYPE html>
 <html lang="ko" data-theme="dark">
 <head>
@@ -17,8 +19,6 @@
             --accent-color: #238636;
             --section-bg: rgba(255, 255, 255, 0.05);
             --arrow-color: #ffffff; /* 기본 화살표 색상 */
-            --highlight-color: #000000; /* 하이라이트 색상: 검은색 */
-            --subtext-color: #6c757d; /* 부가 텍스트 색상 */
         }
 
         [data-theme="light"] {
@@ -201,8 +201,8 @@
             margin-right: 8px;
         }
         .projects {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
         .project {
@@ -210,10 +210,6 @@
             padding: 1.5rem;
             border-radius: 10px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: row;
-            align-items: center;
             opacity: 0;
             transform: translateY(20px);
         }
@@ -224,106 +220,231 @@
         }
         .project:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 25px rgba(88, 166, 255, 0.2);
         }
-        .project-icon {
+        .project h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        .project i {
             font-size: 2rem;
-            color: var(--primary-color);
-            margin-right: 1rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
         }
-        .project-content {
-            flex: 1;
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .project-content h3 {
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--section-bg);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .theme-toggle:hover {
+            background: var(--primary-color);
+        }
+        .theme-toggle i {
+            color: var(--text-color);
             font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
         }
-        .project-content p {
-            margin-bottom: 0.5rem;
+        [data-theme="light"] .theme-toggle i {
+            color: #000000;
+        }
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--section-bg);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .language-toggle:hover {
+            background: var(--primary-color);
+        }
+        .language-toggle i {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        [data-theme="light"] .language-toggle i {
+            color: #000000;
         }
         .subtext {
+            font-size: 0.8rem;
             color: var(--subtext-color);
+            margin-top: 0.5rem;
         }
         footer {
-            padding: 1.5rem;
+            background: var(--bg-color); /* Ensure contrast with text */
+            color: var(--subtext-color);
+            padding: 1rem 0;
             text-align: center;
-            color: var(--text-color);
-            border-top: 1px solid var(--primary-color);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+            position: relative;
+            animation: fadeIn 2s ease-out;
         }
+
         footer p {
-            margin-top: 1rem;
-            font-size: 1rem;
+            margin: 0;
+            font-size: 0.9rem;
+            animation: bounceText 1s ease-in-out infinite;
         }
-        footer a {
-            color: var(--primary-color);
-            text-decoration: none;
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceText {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="header-bg"></div>
-        <div class="container">
-            <h1>Welcome to Lox_so's Portfolio</h1>
-            <div class="greeting">Hi, I'm Lox_so</div>
-            <div class="scroll-down"><i class="fas fa-chevron-down"></i></div>
-        </div>
+        <h1 class="greeting">Hello, I'm Lox_so</h1>
+        <p>Welcome to my portfolio.</p>
+        <a href="#content" class="scroll-down"><i class="fas fa-arrow-down"></i></a>
     </header>
 
-    <main class="container content">
-        <section class="section">
-            <h2 class="section-title"><i class="fas fa-cogs"></i> Skills</h2>
-            <div class="skills">
-                <div class="skill"><i class="fab fa-html5"></i> HTML</div>
-                <div class="skill"><i class="fab fa-css3-alt"></i> CSS</div>
-                <div class="skill"><i class="fab fa-js"></i> JavaScript</div>
-                <div class="skill"><i class="fab fa-python"></i> Python</div>
-                <div class="skill"><i class="fab fa-node"></i> Node.js</div>
-            </div>
-        </section>
+    <div class="container">
+        <div id="content" class="content">
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-user"></i> About Me</h2>
+                <p>Hello, I'm Lox_so. I'm the developer of HanniBot and a bot developer with expertise in HTML, JavaScript, Python, Discord.js, Py-cord, and Node.js.</p>
+                <p class="subtext">안녕하세요, 저는 Lox_so입니다. HanniBot의 개발자이자 봇 개발자입니다. 주로 HTML, JavaScript, Python, Discord.js, Py-cord, Node.js를 사용하여 봇을 개발합니다.</p>
+            </section>
 
-        <section class="section">
-            <h2 class="section-title"><i class="fas fa-robot"></i> Projects</h2>
-            <div class="projects">
-                <div class="project">
-                    <div class="project-icon"><i class="fas fa-music"></i></div>
-                    <div class="project-content">
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-code"></i> Tech Stack</h2>
+                <div class="skills">
+                    <div class="skill"><i class="fab fa-js-square"></i> JavaScript</div>
+                    <div class="skill"><i class="fab fa-node-js"></i> Node.js</div>
+                    <div class="skill"><i class="fab fa-python"></i> Python</div>
+                    <div class="skill"><i class="fab fa-html5"></i> HTML5</div>
+                    <div class="skill"><i class="fab fa-discord"></i> Discord.js</div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title"><i class="fas fa-robot"></i> Projects</h2>
+                <div class="projects">
+                    <div class="project">
+                        <i class="fas fa-music"></i>
                         <h3>Sianbot v3</h3>
-                        <p>A versatile music streaming bot that fetches and plays music from YouTube. Includes advanced queue management and playlist creation features.</p>
-                        <p class="subtext">유튜브에서 음악을 가져와 재생하는 다재다능한 뮤직봇입니다. 고급 큐 관리 및 재생 목록 생성 기능을 포함하고 있습니다.</p>
-                    </div>
-                </div>
-                <div class="project">
-                    <div class="project-icon"><i class="fas fa-info-circle"></i></div>
-                    <div class="project-content">
+                        <p>A music streaming bot that plays music from YouTube.</p>
+                        <p class="subtext">유튜브에서 음악을 가져와 재생하는 뮤직봇입니다.</p>
+                    </div>    
+                    <div class="project">
+                        <i class="fas fa-info-circle"></i>
                         <h3>Hannibot</h3>
-                        <p>A comprehensive bot that offers detailed information on NewJeans and its members, along with interactive features such as member quizzes and event reminders.</p>
-                        <p class="subtext">뉴진스와 멤버들에 대한 상세 정보를 제공하며, 멤버 퀴즈 및 이벤트 알림과 같은 인터랙티브 기능도 포함된 봇입니다.</p>
+                        <p>A bot that provides information about NewJeans and its members.</p>
+                        <p class="subtext">뉴진스의 정보와 특정 멤버의 정보를 제공하는 봇입니다.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-    </main>
+            </section>
+        </div>
+        <footer>
+            <p>&copy; 2024 Lox_so. All rights reserved.</p>
+        </footer>        
+    </div>
 
-    <footer>
-        <p>&copy; 2024 Lox_so. All rights reserved. <a href="#">Privacy Policy</a></p>
-    </footer>
-
+    <div class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </div>
+    <div class="language-toggle">
+        <i class="fas fa-globe"></i>
+    </div>
+ <!-- Link added to language-toggle -->
+    <a href="https://hannibot.netlify.app" class="language-toggle" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-globe"></i>
+    </a>
+    
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.section');
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
+        const themeToggle = document.querySelector('.theme-toggle');
+        const currentTheme = localStorage.getItem('theme') || 'dark';
 
-            sections.forEach(section => {
-                observer.observe(section);
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'light') {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+       
+        themeToggle.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            if (theme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        const sections = document.querySelectorAll('.section');
+        const skills = document.querySelectorAll('.skill');
+        const projects = document.querySelectorAll('.project');
+
+        const showSection = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
             });
+        };
+
+        const observer = new IntersectionObserver(showSection, {
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        skills.forEach(skill => {
+            observer.observe(skill);
+        });
+
+        projects.forEach(project => {
+            observer.observe(project);
         });
     </script>
 </body>
