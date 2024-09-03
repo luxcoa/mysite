@@ -137,13 +137,9 @@
             margin-bottom: 3rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease;
             backdrop-filter: blur(10px);
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        .section.visible {
+            /* 초기 상태에서 섹션이 보이도록 수정 */
             opacity: 1;
             transform: translateY(0);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
         .section:hover {
             transform: translateY(-5px);
@@ -188,13 +184,9 @@
             display: flex;
             align-items: center;
             transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(10px);
-        }
-        .skill.visible {
+            /* 초기 상태에서 스킬이 보이도록 수정 */
             opacity: 1;
             transform: translateY(0);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
         .skill:hover {
             transform: translateY(-3px);
@@ -213,13 +205,9 @@
             padding: 1.5rem;
             border-radius: 10px;
             transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        .project.visible {
+            /* 초기 상태에서 프로젝트가 보이도록 수정 */
             opacity: 1;
             transform: translateY(0);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
         .project:hover {
             transform: translateY(-5px);
@@ -343,13 +331,13 @@
                 <div class="projects">
                     <div class="project">
                         <i class="fas fa-laptop-code"></i>
-                        <h3>Sianbot V3</h3>
-                        <p>A music streaming bot that plays music from YouTube.</p>
+                        <h3>Project 1</h3>
+                        <p>Description of project 1.</p>
                     </div>
                     <div class="project">
                         <i class="fas fa-laptop-code"></i>
-                        <h3>Hannibot</h3>
-                        <p>A bot that provides information about NewJeans and its members.</p>
+                        <h3>Project 2</h3>
+                        <p>Description of project 2.</p>
                     </div>
                 </div>
             </div>
