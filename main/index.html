@@ -1,13 +1,16 @@
-
-나의 말:
 <!DOCTYPE html>
 <html lang="ko" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lox_so's Portfolio</title>
+    <!-- Font Awesome Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    
+    <!-- Favicon Links -->
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
         
@@ -18,19 +21,19 @@
             --secondary-color: #1f6feb;
             --accent-color: #238636;
             --section-bg: rgba(255, 255, 255, 0.05);
-            --arrow-color: #ffffff; /* 기본 화살표 색상 */
+            --arrow-color: #ffffff;
         }
 
         [data-theme="light"] {
-            --bg-color: #ffffff; /* 배경 색상: 흰색 */
-            --text-color: #24292e; /* 본문 텍스트 색상 */
-            --primary-color: #000000; /* 주요 색상: 검은색 */
-            --secondary-color: #000000; /* 보조 색상: 검은색 */
-            --accent-color: #28a745; /* 강조 색상 (예: 버튼 등) */
-            --section-bg: rgba(0, 0, 0, 0.05); /* 섹션 배경: 연한 검은색 */
-            --highlight-color: #000000; /* 하이라이트 색상: 검은색 */
-            --subtext-color: #6c757d; /* 부가 텍스트 색상 */
-            --arrow-color: #000000; /* 화살표 색상: 검은색 */
+            --bg-color: #ffffff;
+            --text-color: #24292e;
+            --primary-color: #000000;
+            --secondary-color: #000000;
+            --accent-color: #28a745;
+            --section-bg: rgba(0, 0, 0, 0.05);
+            --highlight-color: #000000;
+            --subtext-color: #6c757d;
+            --arrow-color: #000000;
         }
 
         /* General styling */
@@ -114,7 +117,7 @@
             animation: bounce 2s infinite;
             cursor: pointer;
             transition: opacity 0.3s ease;
-            color: var(--arrow-color); /* 화살표 색상 */
+            color: var(--arrow-color);
         }
         .scroll-down:hover {
             opacity: 0.7;
@@ -246,206 +249,146 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            z-index: 1000;
-            background: var(--section-bg);
+            z-index: 10;
+            background: var(--bg-color);
+            border: none;
+            padding: 10px;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             transition: background 0.3s ease;
-        }
-        .theme-toggle:hover {
-            background: var(--primary-color);
         }
         .theme-toggle i {
-            color: var(--text-color);
             font-size: 1.5rem;
-            transition: color 0.3s ease;
+            color: var(--primary-color);
         }
-        [data-theme="light"] .theme-toggle i {
-            color: #000000;
+        .theme-toggle:hover {
+            transform: translateY(-2px);
         }
-        .language-toggle {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            background: var(--section-bg);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
+        .contact-form {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .contact-form input, .contact-form textarea {
+            padding: 0.75rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(88, 166, 255, 0.5);
+        }
+        .contact-form button {
+            padding: 0.75rem;
+            border: none;
+            background: var(--primary-color);
+            color: #fff;
+            border-radius: 5px;
             cursor: pointer;
             transition: background 0.3s ease;
         }
-        .language-toggle:hover {
-            background: var(--primary-color);
-        }
-        .language-toggle i {
-            color: var(--text-color);
-            font-size: 1.5rem;
-            transition: color 0.3s ease;
-        }
-        [data-theme="light"] .language-toggle i {
-            color: #000000;
-        }
-        .subtext {
-            font-size: 0.8rem;
-            color: var(--subtext-color);
-            margin-top: 0.5rem;
+        .contact-form button:hover {
+            background: var(--secondary-color);
         }
         footer {
-            background: var(--bg-color); /* Ensure contrast with text */
-            color: var(--subtext-color);
-            padding: 1rem 0;
+            padding: 2rem 0;
             text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 3rem;
-            position: relative;
-            animation: fadeIn 2s ease-out;
-        }
-
-        footer p {
-            margin: 0;
             font-size: 0.9rem;
-            animation: bounceText 1s ease-in-out infinite;
+            background-color: var(--section-bg);
+            color: var(--subtext-color);
+            border-top: 1px solid var(--section-bg);
         }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        footer p {
+            margin-bottom: 0.5rem;
         }
-
-        @keyframes bounceText {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: var(--secondary-color);
         }
     </style>
 </head>
 <body>
+
     <header>
         <div class="header-bg"></div>
-        <h1 class="greeting">Hello, I'm Lox_so</h1>
-        <p>Welcome to my portfolio.</p>
-        <a href="#content" class="scroll-down"><i class="fas fa-arrow-down"></i></a>
+        <h1 class="greeting">Welcome to Lox_so's Portfolio</h1>
+        <div class="scroll-down">
+            <i class="fas fa-arrow-down"></i>
+        </div>
     </header>
 
     <div class="container">
-        <div id="content" class="content">
-            <section class="section">
-                <h2 class="section-title"><i class="fas fa-user"></i> About Me</h2>
-                <p>Hello, I'm Lox_so. I'm the developer of HanniBot and a bot developer with expertise in HTML, JavaScript, Python, Discord.js, Py-cord, and Node.js.</p>
-                <p class="subtext">안녕하세요, 저는 Lox_so입니다. HanniBot의 개발자이자 종합 봇 개발자입니다. 주로 HTML, JavaScript, Python, Discord.js, Py-cord, Node.js를 사용하여 봇을 개발합니다.</p>
-            </section>
-
-            <section class="section">
-                <h2 class="section-title"><i class="fas fa-code"></i>Stacks</h2>
+        <section class="content">
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-code"></i>Skills</h2>
                 <div class="skills">
-                    <div class="skill"><i class="fab fa-js-square"></i> JavaScript</div>
-                    <div class="skill"><i class="fab fa-node-js"></i> Node.js</div>
-                    <div class="skill"><i class="fab fa-python"></i> Python</div>
-                    <div class="skill"><i class="fab fa-html5"></i> HTML5</div>
-                    <div class="skill"><i class="fab fa-discord"></i> Discord.js</div>
+                    <div class="skill"><i class="fab fa-html5"></i>HTML</div>
+                    <div class="skill"><i class="fab fa-css3-alt"></i>CSS</div>
+                    <div class="skill"><i class="fab fa-js-square"></i>JavaScript</div>
+                    <div class="skill"><i class="fab fa-python"></i>Python</div>
+                    <div class="skill"><i class="fab fa-react"></i>React</div>
                 </div>
-            </section>
+            </div>
 
-            <section class="section">
-                <h2 class="section-title"><i class="fas fa-robot"></i> Projects</h2>
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-project-diagram"></i>Projects</h2>
                 <div class="projects">
                     <div class="project">
-                        <i class="fas fa-music"></i>
-                        <h3>Sianbot v3</h3>
+                        <i class="fas fa-laptop-code"></i>
+                        <h3>Sianbot V3</h3>
                         <p>A music streaming bot that plays music from YouTube.</p>
-                        <p class="subtext">유튜브에서 음악을 가져와 재생하는 뮤직봇입니다.</p>
-                    </div>    
+                    </div>
                     <div class="project">
-                        <i class="fas fa-info-circle"></i>
+                        <i class="fas fa-laptop-code"></i>
                         <h3>Hannibot</h3>
                         <p>A bot that provides information about NewJeans and its members.</p>
-                        <p class="subtext">뉴진스의 정보와 특정 멤버의 정보를 제공하는 봇입니다.</p>
                     </div>
                 </div>
-            </section>
-        </div>
-        <footer>
-            <p>&copy; 2024 Lox_so. All rights reserved.</p>
-        </footer>        
+            </div>
+
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-envelope"></i>Contact</h2>
+                <form class="contact-form">
+                    <input type="text" name="name" placeholder="Your Name">
+                    <input type="email" name="email" placeholder="Your Email">
+                    <textarea name="message" rows="5" placeholder="Your Message"></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
     </div>
 
-    <div class="theme-toggle">
+    <footer>
+        <p>&copy; 2024 Lox_so. All Rights Reserved.</p>
+        <p>Made with <i class="fas fa-heart"></i> and <i class="fas fa-code"></i> by Lox_so.</p>
+    </footer>
+
+    <!-- Theme toggle button -->
+    <button class="theme-toggle">
         <i class="fas fa-moon"></i>
-    </div>
-    <div class="language-toggle">
-        <i class="fas fa-globe"></i>
-    </div>
- <!-- Link added to language-toggle -->
-    <a href="https://hannibot.netlify.app" class="language-toggle" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-webflow"></i> Webflow
-    </a>
-    
+    </button>
+
     <script>
-        const themeToggle = document.querySelector('.theme-toggle');
+        // Theme toggle script
+        const themeToggleBtn = document.querySelector('.theme-toggle');
         const currentTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
 
-        if (currentTheme) {
-            document.documentElement.setAttribute('data-theme', currentTheme);
-            if (currentTheme === 'light') {
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-            }
-        }
-       
-        themeToggle.addEventListener('click', () => {
-            let theme = document.documentElement.getAttribute('data-theme');
-            if (theme === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'light');
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-                localStorage.setItem('theme', 'light');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-
-        const sections = document.querySelectorAll('.section');
-        const skills = document.querySelectorAll('.skill');
-        const projects = document.querySelectorAll('.project');
-
-        const showSection = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        };
-
-        const observer = new IntersectionObserver(showSection, {
-            threshold: 0.1
-        });
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
-        skills.forEach(skill => {
-            observer.observe(skill);
-        });
-
-        projects.forEach(project => {
-            observer.observe(project);
+        themeToggleBtn.addEventListener('click', () => {
+            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggleBtn.innerHTML = newTheme === 'dark' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
         });
     </script>
+
 </body>
 </html>
