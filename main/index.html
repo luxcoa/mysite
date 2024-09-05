@@ -8,7 +8,293 @@
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/images/favicon.png" type="image/png">
     <style>
-        /* 기존 스타일 생략 */
+        /* 스타일링 설정 */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --bg-color: #0a0c10;
+            --text-color: #e6edf3;
+            --primary-color: #58a6ff;
+            --secondary-color: #1f6feb;
+            --accent-color: #238636;
+            --section-bg: rgba(255, 255, 255, 0.05);
+            --arrow-color: #ffffff;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #24292e;
+            --primary-color: #000000;
+            --secondary-color: #000000;
+            --accent-color: #28a745;
+            --section-bg: rgba(0, 0, 0, 0.05);
+            --highlight-color: #000000;
+            --subtext-color: #6c757d;
+            --arrow-color: #000000;
+        }
+
+        /* 기본 스타일링 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            scroll-behavior: smooth;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.discordapp.com/attachments/1222537919479287860/1268619898863616110/aespa-hot-mess-karina-winter-giselle-ningning-hd-wallpaper-uhdpaper.com-3440k.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.3) blur(5px);
+            z-index: -1;
+            animation: zoomEffect 20s infinite alternate;
+            transition: filter 0.5s ease;
+        }
+        [data-theme="light"] .header-bg {
+            filter: brightness(0.7) blur(5px);
+        }
+        @keyframes zoomEffect {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            animation: fadeInDown 1s ease-out;
+            color: var(--highlight-color);
+        }
+        .greeting {
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--text-color);
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            position: relative;
+            padding: 0 0.5rem;
+            border-right: 0.15em solid var(--text-color);
+            animation: blinkCursor 0.75s step-end infinite;
+        }
+        @keyframes blinkCursor {
+            50% { border-color: transparent; }
+        }
+        .scroll-down {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            color: var(--arrow-color);
+        }
+        .scroll-down:hover {
+            opacity: 0.7;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-30px) translateX(-50%); }
+            60% { transform: translateY(-15px) translateX(-50%); }
+        }
+        .content {
+            padding: 4rem 0;
+        }
+        .section {
+            background: var(--section-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease;
+            backdrop-filter: blur(10px);
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        .section:hover .section-title::after {
+            width: 100px;
+        }
+        .section-title i {
+            margin-right: 15px;
+            font-size: 1.8rem;
+        }
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .skill {
+            background: var(--secondary-color);
+            color: #ffffff;
+            padding: 0.7rem 1.2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .skill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(88, 166, 255, 0.4);
+        }
+        .skill i {
+            margin-right: 8px;
+        }
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .project {
+            background: var(--section-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(88, 166, 255, 0.2);
+        }
+        .project h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        .project i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            background: var(--bg-color);
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease;
+        }
+        .theme-toggle i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .contact-form input, .contact-form textarea {
+            padding: 0.75rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(88, 166, 255, 0.5);
+        }
+        .contact-form button {
+            padding: 0.75rem;
+            border: none;
+            background: var(--primary-color);
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .contact-form button:hover {
+            background: var(--secondary-color);
+        }
+        footer {
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            background-color: var(--section-bg);
+            color: var(--subtext-color);
+            border-top: 1px solid var(--section-bg);
+        }
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        footer a:hover {
+            color: var(--secondary-color);
+        }
     </style>
 </head>
 <body>
@@ -22,13 +308,11 @@
 
     <div class="container">
         <section class="content">
-            <!-- About Me 섹션 -->
             <div class="section">
-                <h2 class="section-title"><i class="fas fa-user"></i> About Me</h2>
-                <p>Hello! I'm Lox_so, a passionate developer with a love for creating music bots and various innovative projects. Welcome to my portfolio where you can explore my work and contact me!</p>
+                <h2 class="section-title"><i class="fas fa-user"></i>About Me</h2>
+                <p>Hi I'm Lox_so! web developer specializing in backend development and discord bot.</p>
             </div>
 
-            <!-- 기존 Skills, Projects, Contact 섹션들 -->
             <div class="section">
                 <h2 class="section-title"><i class="fas fa-code"></i>Skills</h2>
                 <div class="skills">
@@ -78,7 +362,45 @@
     </button>
 
     <script>
-        // 기존 스크립트 생략
+        // Theme toggle script
+        const themeToggleBtn = document.querySelector('.theme-toggle');
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+
+        themeToggleBtn.addEventListener('click', () => {
+            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggleBtn.innerHTML = newTheme === 'dark' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+        });
+
+        // Contact form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {
+                username: formData.get('name'),
+                content: `**Name:** ${formData.get('name')}\n**Email:** ${formData.get('email')}\n**Message:** ${formData.get('message')}`
+            };
+
+            fetch('https://discord.com/api/webhooks/1281272034155958314/pms6aY1Ze8xw7gOeyXefBG7_sKTr32_czEGY1Vthe8b9FFRUJNOnOyTK_HHBjArXUea4', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(() => {
+                alert('Message sent!');
+                this.reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error sending your message.');
+            });
+        });
     </script>
 </body>
 </html>
