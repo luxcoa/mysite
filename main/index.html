@@ -33,7 +33,6 @@
             overflow-x: hidden;
             user-select: none;
             transition: background-color 0.3s, color 0.3s;
-            scroll-behavior: smooth; /* Smooth scrolling */
         }
 
         nav {
@@ -141,13 +140,11 @@
             background-color: var(--section-bg);
             transition: transform 0.3s, background-color 0.3s;
             opacity: 0;
-            transform: translateY(30px); /* 처음에 아래로 이동한 상태 */
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        section.visible {
-            opacity: 1;
-            transform: translateY(0); /* 정상 위치로 이동 */
+            animation: fadeIn 0.8s forwards;
+            animation-delay: 0.3s;
+            display: flex; /* 추가 */
+            flex-direction: column; /* 추가 */
+            justify-content: flex-start; /* 추가 */
         }
 
         section h2 {
@@ -296,7 +293,7 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li> 
+            <li><a href="#skills">Skills</a></li>
             <li>|</li>
             <li>
                 <button class="theme-toggle" id="themeToggle">
@@ -307,7 +304,7 @@
     </nav>
 
     <div class="hero" id="home">
-        <img src="images/J.jpg" alt="Profile Image" class="profile-image">
+        <img src="images/J.jpg  " alt="Profile Image" class="profile-image">
         <h1>J</h1>
         <p>Crafting code for a better tomorrow.</p>
     </div>
@@ -320,58 +317,63 @@
         </section>
 
         <section id="projects">
-            <h2><i class="fas fa-briefcase icon"></i> Projects</h2>
-            <p>Here are some of the amazing projects I have worked on:</p>
+            <h2><i class="fas fa-project-diagram icon"></i> Projects</h2>
+            <h3>
+                <a href="https://hannibot.netlify.app/home" target="_blank">
+                    Hannibot <i class="fas fa-external-link-alt"></i>
+                </a>
+            </h3>
+            <p>Hannibot is a Discord bot that offers various features. Key features include information bot, gambling, and various utility functions.</p>
         </section>
 
         <section id="skills">
-            <h2><i class="fas fa-cogs icon"></i> Skills</h2>
-            <div class="skills">
-                <div class="skill"><i class="fab fa-html5"></i> HTML5</div>
-                <div class="skill"><i class="fab fa-css3-alt"></i> CSS3</div>
-                <div class="skill"><i class="fab fa-js"></i> JavaScript</div>
+            <div class="skills-container">
+                <div class="skills-header">
+                    <i class="fas fa-code icon"></i>
+                    <h2>Skills</h2>
+                </div>
+                <div class="skills">
+                    <div class="skill"><i class="fab fa-html5"></i>HTML</div>
+                    <div class="skill"><i class="fab fa-css3-alt"></i>CSS</div>
+                    <div class="skill"><i class="fab fa-js-square"></i>JavaScript</div>
+                    <div class="skill"><i class="fab fa-python"></i>Python</div>
+                    <div class="skill"><i class="fab fa-react"></i>React</div>
+                </div>
             </div>
         </section>
-
     </div>
-
     <footer>
         <p>&copy; 2024 J. All rights reserved.</p>
         <div class="social-icons">
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://github.com/jaxxae" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="mailto:hannifam@proton.me"><i class="fas fa-envelope"></i></a>
         </div>
     </footer>
 
     <script>
-        // Theme Toggle Functionality
         const themeToggle = document.getElementById('themeToggle');
-        const body = document.body;
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // 아이콘 변경
+        }
 
         themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            const icon = themeToggle.querySelector('i');
-            icon.classList.toggle('fa-moon');
-            icon.classList.toggle('fa-sun');
-        });
+            document.body.classList.toggle('dark-mode');
 
-        // Section Animation on Scroll
-        const sections = document.querySelectorAll('section');
-        const options = {
-            threshold: 0.2 // 20% of the section is visible before triggering
-        };
+            themeToggle.classList.add('rotate'); // 애니메이션 클래스 추가
+            setTimeout(() => {
+                themeToggle.classList.remove('rotate'); // 애니메이션 클래스 제거
+            }, 500); // 애니메이션 지속 시간과 일치
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, options);
-
-        sections.forEach(section => {
-            observer.observe(section);
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // 아이콘 변경
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // 아이콘 변경
+            }
         });
     </script>
 
