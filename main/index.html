@@ -1,176 +1,201 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lox_so's Portfolio</title>
+    <title>J</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon.png" type="image/png">
     <style>
-        /* 스타일링 설정 */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-
         :root {
-            --bg-color: #0a0c10;
-            --text-color: #e6edf3;
-            --primary-color: #58a6ff;
-            --secondary-color: #1f6feb;
-            --accent-color: #238636;
-            --section-bg: rgba(255, 255, 255, 0.05);
-            --arrow-color: #ffffff;
+            --primary-color: #6C63FF;
+            --secondary-color: #388df5;
+            --background-color: #FFFFFF;
+            --text-color: #333333;
+            --section-bg: #F9F9F9;
         }
 
-        [data-theme="light"] {
-            --bg-color: #ffffff;
-            --text-color: #24292e;
-            --primary-color: #000000;
-            --secondary-color: #000000;
-            --accent-color: #28a745;
-            --section-bg: rgba(0, 0, 0, 0.05);
-            --highlight-color: #000000;
-            --subtext-color: #6c757d;
-            --arrow-color: #000000;
+        .dark-mode {
+            --primary-color: #8C83FF;
+            --secondary-color: #58ADFF;
+            --background-color: #121212;
+            --text-color: #E0E0E0;
+            --section-bg: #1E1E1E;
         }
 
-        /* 기본 스타일링 */
-        * {
+        body {
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-        body, html {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
+            background-color: var(--background-color);
             color: var(--text-color);
-            background-color: var(--bg-color);
-            scroll-behavior: smooth;
-            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+            user-select: none;
+            transition: background-color 0.3s, color 0.3s;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--background-color);
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: background-color 0.3s;
         }
-        header {
-            height: 100vh;
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .hero {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            height: 100vh;
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
         }
-        .header-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://cdn.discordapp.com/attachments/1222537919479287860/1268619898863616110/aespa-hot-mess-karina-winter-giselle-ningning-hd-wallpaper-uhdpaper.com-3440k.jpg');
-            background-size: cover;
-            background-position: center;
-            filter: brightness(0.3) blur(5px);
-            z-index: -1;
-            animation: zoomEffect 20s infinite alternate;
-            transition: filter 0.5s ease;
-        }
-        [data-theme="light"] .header-bg {
-            filter: brightness(0.7) blur(5px);
-        }
-        @keyframes zoomEffect {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.1); }
-        }
-        h1 {
-            font-size: 4rem;
-            font-weight: 700;
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
             margin-bottom: 1rem;
-            letter-spacing: 2px;
-            animation: fadeInDown 1s ease-out;
-            color: var(--highlight-color);
+            animation: zoomIn 0.6s forwards;
+            opacity: 0;
+            animation-delay: 0.5s;
         }
-        .greeting {
-            font-size: 2rem;
-            font-weight: 500;
-            color: var(--text-color);
-            white-space: nowrap;
-            overflow: hidden;
-            display: inline-block;
-            position: relative;
-            padding: 0 0.5rem;
-            border-right: 0.15em solid var(--text-color);
-            animation: blinkCursor 0.75s step-end infinite;
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
-        @keyframes blinkCursor {
-            50% { border-color: transparent; }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
-        .scroll-down {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-            color: var(--arrow-color);
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
-        .scroll-down:hover {
-            opacity: 0.7;
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-            40% { transform: translateY(-30px) translateX(-50%); }
-            60% { transform: translateY(-15px) translateX(-50%); }
-        }
-        .content {
-            padding: 4rem 0;
-        }
-        .section {
-            background: var(--section-bg);
+
+        section {
+            flex: 1 1 45%;
+            margin: 1rem;
             padding: 2rem;
             border-radius: 10px;
-            margin-bottom: 3rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease;
-            backdrop-filter: blur(10px);
-            opacity: 1;
-            transform: translateY(0);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--section-bg);
+            transition: transform 0.3s, background-color 0.3s;
+            opacity: 0;
+            animation: fadeIn 0.8s forwards;
+            animation-delay: 0.3s;
+            display: flex; /* 추가 */
+            flex-direction: column; /* 추가 */
+            justify-content: flex-start; /* 추가 */
         }
-        .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+
+        section h2 {
+            opacity: 0;
+            animation: slideIn 0.5s forwards;
+            animation-delay: 0.3s;
         }
-        .section-title {
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        section:hover {
+            transform: scale(1.02);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            margin: 0; /* 여백 제거 */
+            padding-bottom: 0.5rem; /* 아래 여백 줄임 */
+            padding-top: 0.5rem; /* 위 여백 추가 */
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        .icon {
             font-size: 2rem;
             color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            position: relative;
+            transition: transform 0.3s;
         }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--primary-color);
-            transition: width 0.3s ease;
+
+        .icon:hover {
+            transform: rotate(360deg);
         }
-        .section:hover .section-title::after {
-            width: 100px;
-        }
-        .section-title i {
-            margin-right: 15px;
-            font-size: 1.8rem;
-        }
+
         .skills {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
+            align-items: center;
         }
+
         .skill {
             background: var(--secondary-color);
             color: #ffffff;
@@ -183,138 +208,130 @@
             opacity: 1;
             transform: translateY(0);
         }
+
         .skill:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(88, 166, 255, 0.4);
         }
+
         .skill i {
             margin-right: 8px;
         }
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--section-bg);
+            margin-top: 2rem;
+            transition: background-color 0.3s;
         }
-        .project {
-            background: var(--section-bg);
-            padding: 1.5rem;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            opacity: 1;
-            transform: translateY(0);
+
+        a {
+            color: inherit;
+            text-decoration: none;
         }
-        .project:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(88, 166, 255, 0.2);
+
+        .social-icons {
+            margin-top: 1rem;
         }
-        .project h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-        .project i {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-        }
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 10;
-            background: var(--bg-color);
-            border: none;
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: background 0.3s ease;
-        }
-        .theme-toggle i {
+
+        .social-icons a {
+            margin: 0 10px;
             font-size: 1.5rem;
             color: var(--primary-color);
+            transition: transform 0.3s;
         }
-        .theme-toggle:hover {
-            transform: translateY(-2px);
+
+        .social-icons a:hover {
+            transform: scale(1.2);
         }
-        .contact-form {
+
+        .skills-container {
             display: flex;
             flex-direction: column;
+        }
+
+        .skills-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .skills-header h2 {
+            margin: 0;
+            padding: 0;
+        }
+
+        .skills-header .icon {
+            margin-right: 10px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
             gap: 1rem;
         }
-        .contact-form input, .contact-form textarea {
-            padding: 0.75rem;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            background: var(--bg-color);
-            color: var(--text-color);
-            transition: all 0.3s ease;
+
+        .rotate {
+            animation: rotate 0.5s forwards;
         }
-        .contact-form input:focus, .contact-form textarea:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 5px rgba(88, 166, 255, 0.5);
-        }
-        .contact-form button {
-            padding: 0.75rem;
-            border: none;
-            background: var(--primary-color);
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        .contact-form button:hover {
-            background: var(--secondary-color);
-        }
-        footer {
-            padding: 2rem 0;
-            text-align: center;
-            font-size: 0.9rem;
-            background-color: var(--section-bg);
-            color: var(--subtext-color);
-            border-top: 1px solid var(--section-bg);
-        }
-        footer p {
-            margin-bottom: 0.5rem;
-        }
-        footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        footer a:hover {
-            color: var(--secondary-color);
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-bg"></div>
-        <h1 class="greeting">Welcome to Lox_so's Portfolio</h1>
-        <div class="scroll-down">
-            <i class="fas fa-arrow-down"></i>
-        </div>
-    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li>|</li>
+            <li>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="hero" id="home">
+        <img src="images/J.jpg  " alt="Profile Image" class="profile-image">
+        <h1>J</h1>
+        <p>Crafting code for a better tomorrow.</p>
+    </div>
 
     <div class="container">
-        <section class="content">
-            <div class="section">
-                <h2 class="section-title"><i class="fas fa-user"></i>About Me</h2>
-                <p>Hi I'm Lox_so! web developer specializing in backend development and discord bot.</p>
-            </div>
 
-            <div class="section">
-                <h2 class="section-title"><i class="fas fa-code"></i>Skills</h2>
+        <section id="about">
+            <h2><i class="fas fa-user icon"></i> About</h2>
+            <p>I am a developer dedicated to transforming ideas into functional software solutions that enhance user experience and promote efficiency.</p>
+        </section>
+
+        <section id="projects">
+            <h2><i class="fas fa-project-diagram icon"></i> Projects</h2>
+            <h3>
+                <a href="https://hannibot.netlify.app/home" target="_blank">
+                    Hannibot <i class="fas fa-external-link-alt"></i>
+                </a>
+            </h3>
+            <p>Hannibot is a Discord bot that offers various features. Key features include information bot, gambling, and various utility functions.</p>
+        </section>
+
+        <section id="skills">
+            <div class="skills-container">
+                <div class="skills-header">
+                    <i class="fas fa-code icon"></i>
+                    <h2>Skills</h2>
+                </div>
                 <div class="skills">
                     <div class="skill"><i class="fab fa-html5"></i>HTML</div>
                     <div class="skill"><i class="fab fa-css3-alt"></i>CSS</div>
@@ -323,84 +340,42 @@
                     <div class="skill"><i class="fab fa-react"></i>React</div>
                 </div>
             </div>
-
-            <div class="section">
-                <h2 class="section-title"><i class="fas fa-project-diagram"></i>Projects</h2>
-                <div class="projects">
-                    <div class="project">
-                        <i class="fas fa-laptop-code"></i>
-                        <h3>SianBot v3</h3>
-                        <p>A music bot that plays songs from YouTube.</p>
-                    </div>
-                    <div class="project">
-                        <i class="fas fa-laptop-code"></i>
-                        <h3>Hannibot</h3>
-                        <p>A bot with information about NewJeans and various functionalities.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section">
-                <h2 class="section-title"><i class="fas fa-envelope"></i>Contact</h2>
-                <form class="contact-form" id="contact-form">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-                    <button type="submit">Send Message</button>
-                </form>
-            </div>
         </section>
     </div>
-
     <footer>
-        <p>&copy; 2024 Lox_so. All Rights Reserved.</p>
-        <p>Made with <i class="fas fa-heart"></i> and <i class="fas fa-code"></i> by Lox_so.</p>
+        <p>&copy; 2024 J. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="https://github.com/jaxxae" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="mailto:hannifam@proton.me"><i class="fas fa-envelope"></i></a>
+        </div>
     </footer>
 
-    <button class="theme-toggle">
-        <i class="fas fa-moon"></i>
-    </button>
-
     <script>
-        // Theme toggle script
-        const themeToggleBtn = document.querySelector('.theme-toggle');
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', currentTheme);
+        const themeToggle = document.getElementById('themeToggle');
+        const currentTheme = localStorage.getItem('theme');
 
-        themeToggleBtn.addEventListener('click', () => {
-            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            themeToggleBtn.innerHTML = newTheme === 'dark' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
-        });
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // 아이콘 변경
+        }
 
-        // Contact form submission
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
 
-            const formData = new FormData(this);
-            const data = {
-                username: formData.get('name'),
-                content: `**Name:** ${formData.get('name')}\n**Email:** ${formData.get('email')}\n**Message:** ${formData.get('message')}`
-            };
+            themeToggle.classList.add('rotate'); // 애니메이션 클래스 추가
+            setTimeout(() => {
+                themeToggle.classList.remove('rotate'); // 애니메이션 클래스 제거
+            }, 500); // 애니메이션 지속 시간과 일치
 
-            fetch('https://discord.com/api/webhooks/1281272034155958314/pms6aY1Ze8xw7gOeyXefBG7_sKTr32_czEGY1Vthe8b9FFRUJNOnOyTK_HHBjArXUea4', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-            .then(response => response.json())
-            .then(() => {
-                alert('Message sent!');
-                this.reset();
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('There was an error sending your message.');
-            });
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // 아이콘 변경
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // 아이콘 변경
+            }
         });
     </script>
+
 </body>
 </html>
