@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>𝓁</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -14,6 +13,7 @@
             --background-color: #FFFFFF;
             --text-color: #333333;
             --section-bg: #F9F9F9;
+            --transition: all 0.3s ease;
         }
 
         .dark-mode {
@@ -24,60 +24,47 @@
             --section-bg: #1E1E1E;
         }
 
-        body {
-            font-family: 'Poppins', sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
             background-color: var(--background-color);
             color: var(--text-color);
-            overflow-x: hidden;
-            user-select: none;
-            transition: background-color 0.5s, color 0.5s;
+            line-height: 1.6;
+            transition: var(--transition);
         }
 
-        /* 향상된 네비게이션 애니메이션 */
+        /* Navigation */
         nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
             background-color: var(--background-color);
             padding: 1rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             z-index: 1000;
-            transition: all 0.5s ease;
-        }
-
-        nav.scrolled {
-            padding: 0.5rem;
-            background-color: var(--background-color);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
         }
 
         nav ul {
             display: flex;
             justify-content: center;
-            list-style: none;
             align-items: center;
-            padding: 0;
+            gap: 2rem;
+            list-style: none;
         }
 
-        nav ul li {
-            margin: 0 20px;
-            position: relative;
-        }
-
-        nav ul li a {
+        nav a {
             color: var(--text-color);
             text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-            padding: 0.5rem 1rem;
+            font-weight: 500;
             position: relative;
         }
 
-        nav ul li a::after {
+        nav a::after {
             content: '';
             position: absolute;
             bottom: -5px;
@@ -85,35 +72,22 @@
             width: 0;
             height: 2px;
             background-color: var(--primary-color);
-            transition: width 0.3s ease;
+            transition: var(--transition);
         }
 
-        nav ul li a:hover::after {
+        nav a:hover::after {
             width: 100%;
         }
 
-        /* 향상된 히어로 섹션 애니메이션 */
+        /* Hero Section */
         .hero {
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, transparent 0%, var(--background-color) 70%);
-            opacity: 0.8;
-            z-index: -1;
+            padding: 2rem;
         }
 
         .profile-image {
@@ -121,349 +95,118 @@
             height: 150px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 1rem;
             border: 3px solid var(--primary-color);
-            box-shadow: 0 0 20px rgba(108, 99, 255, 0.3);
-            transition: all 0.5s ease;
-            animation: profileEntrance 1.5s ease-out forwards;
+            margin-bottom: 2rem;
         }
 
-        .profile-image:hover {
-            transform: scale(1.1) rotate(5deg);
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 30px rgba(56, 141, 245, 0.5);
-        }
-
-        @keyframes profileEntrance {
-            0% {
-                transform: scale(0) rotate(-180deg);
-                opacity: 0;
-            }
-            60% {
-                transform: scale(1.2) rotate(10deg);
-            }
-            100% {
-                transform: scale(1) rotate(0);
-                opacity: 1;
-            }
-        }
-
-        /* 향상된 섹션 애니메이션 */
+        /* Sections */
         section {
-            flex: 1 1 45%;
-            margin: 1rem;
-            padding: 2rem;
-            border-radius: 15px;
+            padding: 5rem 2rem;
             background-color: var(--section-bg);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(50px);
+            margin: 2rem 0;
         }
 
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 0%, rgba(108, 99, 255, 0.1) 100%);
-            transition: transform 0.5s ease;
-            transform: translateX(-100%);
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
 
-        section:hover::before {
-            transform: translateX(0);
+        .skill-card {
+            background-color: var(--background-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
         }
 
-        /* 향상된 스킬 애니메이션 */
-        .skill {
-            background: var(--secondary-color);
-            color: #ffffff;
-            padding: 0.7rem 1.2rem;
-            border-radius: 25px;
-            font-size: 1rem;
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill-card i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Projects Section */
+        .project-card {
+            background-color: var(--background-color);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--section-bg);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .social-icons {
             display: flex;
-            align-items: center;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
         }
 
-        .skill:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(56, 141, 245, 0.3);
+        .social-icons a {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            transition: var(--transition);
         }
 
-        .skill::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+        .social-icons a:hover {
+            color: var(--secondary-color);
+            transform: translateY(-3px);
         }
 
-        .skill:hover::before {
-            width: 200px;
-            height: 200px;
-        }
-
-        /* 다크모드 토글 애니메이션 개선 */
+        /* Theme Toggle */
         .theme-toggle {
             background: none;
             border: none;
             color: var(--text-color);
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             cursor: pointer;
-            transition: all 0.5s ease;
-            position: relative;
-            padding: 10px;
-            border-radius: 50%;
-            overflow: hidden;
+            transition: var(--transition);
         }
 
-        .theme-toggle:hover {
-            background-color: rgba(108, 99, 255, 0.1);
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .rotate {
-            animation: rotate 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        /* 푸터 애니메이션 */
-        .social-icons a {
-            margin: 0 15px;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            transition: all 0.4s ease;
-            position: relative;
-            display: inline-block;
-        }
-
-        .social-icons a:hover {
-            transform: translateY(-5px);
-            color: var(--secondary-color);
-        }
-
-        .social-icons a::before {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--primary-color);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .social-icons a:hover::before {
-            transform: scaleX(1);
-        }
-        /* 타이핑 효과를 위한 스타일 */
-.typing-text {
-    border-right: 2px solid var(--primary-color);
-    white-space: nowrap;
-    overflow: hidden;
-    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-}
-
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-}
-
-@keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: var(--primary-color) }
-}
-
-/* 부드러운 등장 효과 */
-.fade-up {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.6s ease forwards;
-}
-
-@keyframes fadeUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* 아이콘 플로팅 효과 */
-.floating {
-    animation: floating 3s ease-in-out infinite;
-}
-
-@keyframes floating {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-}
-
-/* 스킬 아이콘 회전 효과 */
-.skill i {
-    margin-right: 8px;
-    transition: transform 0.4s ease;
-}
-
-.skill:hover i {
-    animation: skillIconSpin 0.6s ease;
-}
-
-@keyframes skillIconSpin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* 프로젝트 링크 효과 */
-.project-link {
-    position: relative;
-    display: inline-block;
-    padding: 5px 10px;
-    transition: all 0.3s ease;
-}
-
-.project-link:hover {
-    transform: translateX(10px);
-}
-
-.project-link i {
-    opacity: 0;
-    transform: translateX(-20px);
-    transition: all 0.3s ease;
-}
-
-.project-link:hover i {
-    opacity: 1;
-    transform: translateX(5px);
-}
-
-/* 배경 파티클 효과 */
-.particles {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: -1;
-}
-
-.particle {
-    position: absolute;
-    background: var(--primary-color);
-    border-radius: 50%;
-    opacity: 0.3;
-    animation: particleFloat 15s infinite linear;
-}
-
-@keyframes particleFloat {
-    0% { transform: translateY(0) rotate(0deg); }
-    100% { transform: translateY(-100vh) rotate(360deg); }
-}
-
-/* 섹션 호버 효과 개선 */
-section {
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-section:hover {
-    transform: translateY(-5px) scale(1.02);
-}
-
-// script 태그 내에 다음 스크립트들을 추가해주세요
-
-// 타이핑 효과 적용
-document.addEventListener('DOMContentLoaded', () => {
-    const heroText = document.querySelector('.hero p');
-    heroText.classList.add('typing-text');
-    
-    // 각 섹션에 페이드업 효과 적용
-    document.querySelectorAll('section h2, section p, section .skills').forEach((element, index) => {
-        element.style.animationDelay = `${index * 0.2}s`;
-        element.classList.add('fade-up');
-    });
-    
-    // 아이콘에 플로팅 효과 적용
-    document.querySelectorAll('.icon').forEach(icon => {
-        icon.classList.add('floating');
-    });
-    
-    // 배경 파티클 생성
-    createParticles();
-});
-
-// 배경 파티클 생성 함수
-function createParticles() {
-    const hero = document.querySelector('.hero');
-    const particlesContainer = document.createElement('div');
-    particlesContainer.classList.add('particles');
-    
-    for (let i = 0; i < 20; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        
-        // 랜덤 크기와 위치 설정
-        const size = Math.random() * 5 + 2;
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.top = `${Math.random() * 100}%`;
-        particle.style.animationDelay = `${Math.random() * 15}s`;
-        
-        particlesContainer.appendChild(particle);
-    }
-    
-    hero.appendChild(particlesContainer);
-}
-
-// 프로젝트 링크 효과 적용
-document.querySelectorAll('.project-link').forEach(link => {
-    link.addEventListener('mouseenter', () => {
-        const icon = link.querySelector('i');
-        icon.style.opacity = '1';
-        icon.style.transform = 'translateX(5px)';
-    });
-    
-    link.addEventListener('mouseleave', () => {
-        const icon = link.querySelector('i');
-        icon.style.opacity = '0';
-        icon.style.transform = 'translateX(-20px)';
-    });
-});
     </style>
 </head>
 <body>
-
     <nav>
         <ul>
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#skills">Skills</a></li>
-            <li>|</li>
             <li>
                 <button class="theme-toggle" id="themeToggle">
                     <i class="fas fa-sun"></i>
@@ -479,38 +222,50 @@ document.querySelectorAll('.project-link').forEach(link => {
     </div>
 
     <div class="container">
-
         <section id="about">
-            <h2><i class="fas fa-user icon"></i> About</h2>
+            <h2>About</h2>
             <p>I am a developer dedicated to transforming ideas into functional software solutions that enhance user experience and promote efficiency.</p>
         </section>
 
         <section id="projects">
-            <h2><i class="fas fa-project-diagram icon"></i> Projects</h2>
-<h3>
-    <a href="https://hannibot.netlify.app/home" target="_blank" class="project-link">
-        Hannibot <i class="fas fa-external-link-alt"></i>
-    </a>
-</h3>
-            <p>Hannibot is a Discord bot that offers various features. Key features include information bot, gambling, and various utility functions.</p>
+            <h2>Projects</h2>
+            <div class="project-card">
+                <h3>
+                    <a href="https://hannibot.netlify.app/home" target="_blank">
+                        Hannibot <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </h3>
+                <p>Hannibot is a Discord bot that offers various features. Key features include information bot, gambling, and various utility functions.</p>
+            </div>
         </section>
 
         <section id="skills">
-            <div class="skills-container">
-                <div class="skills-header">
-                    <i class="fas fa-code icon"></i>
-                    <h2>Stacks</h2>
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fab fa-html5"></i>
+                    <h3>HTML</h3>
                 </div>
-                <div class="skills">
-                    <div class="skill"><i class="fab fa-html5"></i>HTML</div>
-                    <div class="skill"><i class="fab fa-css3-alt"></i>CSS</div>
-                    <div class="skill"><i class="fab fa-js-square"></i>JavaScript</div>
-                    <div class="skill"><i class="fab fa-python"></i>Python</div>
-                    <div class="skill"><i class="fab fa-react"></i>React</div>
+                <div class="skill-card">
+                    <i class="fab fa-css3-alt"></i>
+                    <h3>CSS</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-js-square"></i>
+                    <h3>JavaScript</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-python"></i>
+                    <h3>Python</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-react"></i>
+                    <h3>React</h3>
                 </div>
             </div>
         </section>
     </div>
+
     <footer>
         <p>&copy; 2024 𝓁 All rights reserved.</p>
         <div class="social-icons">
@@ -520,30 +275,7 @@ document.querySelectorAll('.project-link').forEach(link => {
     </footer>
 
     <script>
-        // 스크롤 애니메이션
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            const sections = document.querySelectorAll('section');
-            
-            // 네비게이션 스크롤 효과
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-            
-            // 섹션 등장 애니메이션
-            sections.forEach(section => {
-                const sectionTop = section.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (sectionTop < windowHeight * 0.85) {
-                    section.classList.add('visible');
-                }
-            });
-        });
-
-        // 다크모드 토글
+        // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
         const currentTheme = localStorage.getItem('theme');
 
@@ -554,12 +286,7 @@ document.querySelectorAll('.project-link').forEach(link => {
 
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
-            themeToggle.classList.add('rotate');
             
-            setTimeout(() => {
-                themeToggle.classList.remove('rotate');
-            }, 800);
-
             if (document.body.classList.contains('dark-mode')) {
                 localStorage.setItem('theme', 'dark');
                 themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
@@ -569,16 +296,14 @@ document.querySelectorAll('.project-link').forEach(link => {
             }
         });
 
-        // 스킬 아이템 애니메이션
-        document.querySelectorAll('.skill').forEach(skill => {
-            skill.addEventListener('mousemove', (e) => {
-                const rect = skill.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                skill.style.setProperty('--x', `${x}px`);
-                skill.style.setProperty('--y', `${y}px`);
-            });
+        // Scroll Animation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.padding = '0.5rem 1rem';
+            } else {
+                nav.style.padding = '1rem';
+            }
         });
     </script>
 </body>
