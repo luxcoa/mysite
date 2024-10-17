@@ -158,8 +158,7 @@
         }
 
 .skills-container {
-    display: flex;
-    flex-direction: column; /* 수직 정렬 */
+    margin: 2rem 0; /* 상하 여백 추가 */
 }
 
 .skills-header {
@@ -170,6 +169,7 @@
 
 .skills-header .icon {
     margin-right: 10px; /* 아이콘과 제목 사이에 간격 추가 */
+    font-size: 1.5rem; /* 아이콘 크기 조정 */
 }
 
 .skills {
@@ -179,17 +179,20 @@
 }
 
 .skill {
-    background: var(--secondary-color);
-    color: #ffffff;
-    padding: 0.7rem 1.2rem;
-    border-radius: 25px;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    transition: all 0.4s ease;
-    cursor: pointer;
+    background: var(--secondary-color); /* 배경 색상 */
+    color: #ffffff; /* 글자 색상 */
+    padding: 0.7rem 1.2rem; /* 패딩 추가 */
+    border-radius: 25px; /* 둥근 모서리 */
+    font-size: 1rem; /* 글자 크기 */
+    display: flex; /* Flexbox 사용 */
+    align-items: center; /* 수직 중앙 정렬 */
+    transition: all 0.4s ease; /* 부드러운 전환 효과 */
+    cursor: pointer; /* 마우스 포인터 변경 */
 }
 
+.skill i {
+    margin-right: 5px; /* 아이콘과 텍스트 사이 간격 추가 */
+}
 
         /* 푸터 스타일 */
         footer {
