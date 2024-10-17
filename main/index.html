@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>J</title>
+    <title>Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -150,45 +150,30 @@
 
         /* 섹션 스타일 */
         section {
-            flex: 1 1 45%;
-            margin: 1rem;
+            margin: 2rem auto;
             padding: 2rem;
             border-radius: 15px;
             background-color: var(--section-bg);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.5s ease;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(50px);
         }
 
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .skills-container {
+            margin-top: 20px;
         }
 
-        section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 0%, rgba(108, 99, 255, 0.1) 100%);
-            transition: transform 0.5s ease;
-            transform: translateX(-100%);
+        .skills-header {
+            display: flex;
+            align-items: center;
         }
 
-        section:hover::before {
-            transform: translateX(0);
+        .skills-header .icon {
+            margin-right: 10px;
         }
 
-        /* 스킬 섹션 */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        .skills {
+            display: flex;
             gap: 20px;
+            flex-wrap: wrap;
             margin-top: 20px;
         }
 
@@ -199,7 +184,6 @@
             border-radius: 25px;
             font-size: 1rem;
             display: flex;
-            justify-content: center;
             align-items: center;
             gap: 10px;
             transition: all 0.4s ease;
@@ -213,22 +197,42 @@
             box-shadow: 0 10px 20px rgba(56, 141, 245, 0.3);
         }
 
-        .skill::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+        /* 푸터 스타일 */
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: var(--section-bg);
+            position: relative;
         }
 
-        .skill:hover::before {
-            width: 200px;
-            height: 200px;
+        footer .social-icons a {
+            margin: 0 15px;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            transition: all 0.4s ease;
+            position: relative;
+            display: inline-block;
+        }
+
+        footer .social-icons a:hover {
+            transform: translateY(-5px);
+            color: var(--secondary-color);
+        }
+
+        footer .social-icons a::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        footer .social-icons a:hover::before {
+            transform: scaleX(1);
         }
 
         /* 다크모드 토글 */
@@ -248,46 +252,139 @@
         .theme-toggle:hover {
             background-color: rgba(108, 99, 255, 0.1);
         }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .rotate {
-            animation: rotate 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        /* 푸터 애니메이션 */
-        .social-icons a {
-            margin: 0 15px;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            transition: all 0.4s ease;
-            position: relative;
-            display: inline-block;
-        }
-
-        .social-icons a:hover {
-            transform: translateY(-5px);
-            color: var(--secondary-color);
-        }
-
-        .social-icons a::before {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--primary-color);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .social-icons a:hover::before {
-            transform: scaleX(1);
-        }
     </style>
 </head>
 <body>
+    <!-- 네비게이션 바 -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li>|</li>
+            <li>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <div class="hero" id="home">
+        <img src="images/luxcoa.jpg" alt="Profile Image" class="profile-image">
+        <h1>𝓁</h1>
+        <p>Crafting code for a better tomorrow.</p>
+    </div>
+
+    <div class="container">
+        <!-- About 섹션 -->
+        <section id="about">
+            <h2><i class="fas fa-user icon"></i> About</h2>
+            <p>I am a developer dedicated to transforming ideas into functional software solutions that enhance user experience and promote efficiency.</p>
+        </section>
+
+        <!-- Projects 섹션 -->
+        <section id="projects">
+            <h2><i class="fas fa-project-diagram icon"></i> Projects</h2>
+            <h3>
+                <a href="https://hannibot.netlify.app/home" target="_blank">
+                    Hannibot <i class="fas fa-external-link-alt"></i>
+                </a>
+            </h3>
+            <p>Hannibot is a Discord bot that offers various features. Key features include information bot, gambling, and various utility functions.</p>
+        </section>
+
+        <!-- Skills 섹션 -->
+        <section id="skills">
+            <div class="skills-container">
+                <div class="skills-header">
+                    <i class="fas fa-code icon"></i>
+                    <h2>Stacks</h2>
+                </div>
+                <div class="skills">
+                    <div class="skill"><i class="fab fa-html5"></i> HTML</div>
+                    <div class="skill"><i class="fab fa-css3-alt"></i> CSS</div>
+                    <div class="skill"><i class="fab fa-js-square"></i> JavaScript</div>
+                    <div class="skill"><i class="fab fa-python"></i> Python</div>
+                    <div class="skill"><i class="fab fa-react"></i> React</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 푸터 -->
+    <footer>
+        <p>&copy; 2024 𝓁 All rights reserved.</p>
+        <div class="social-icons">
+            <a href="https://github.com/luxcoa" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="mailto:hannifam@proton.me"><i class="fas fa-envelope"></i></a>
+        </div>
+    </footer>
+
+    <!-- 스크립트 -->
+    <script>
+        // 스크롤 애니메이션
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const sections = document.querySelectorAll('section');
+            
+            // 네비게이션 스크롤 효과
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            
+            // 섹션 등장 애니메이션
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight * 0.85) {
+                    section.classList.add('visible');
+                }
+            });
+        });
+
+        // 다크모드 토글
+        const themeToggle = document.getElementById('themeToggle');
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            themeToggle.classList.add('rotate');
+            
+            setTimeout(() => {
+                themeToggle.classList.remove('rotate');
+            }, 800);
+
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        });
+
+        // 스킬 아이템 애니메이션
+        document.querySelectorAll('.skill').forEach(skill => {
+            skill.addEventListener('mousemove', (e) => {
+                const rect = skill.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                skill.style.setProperty('--x', `${x}px`);
+                skill.style.setProperty('--y', `${y}px`);
+            });
+        });
+    </script>
+</body>
+</html>
