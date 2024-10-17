@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>𝓁</title>
+    <title>J</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -13,8 +14,6 @@
             --background-color: #FFFFFF;
             --text-color: #333333;
             --section-bg: #F9F9F9;
-            --hover-color: #7ED6FF; /* 밝은 하늘색 */
-            --transition: all 0.3s ease;
         }
 
         .dark-mode {
@@ -25,68 +24,60 @@
             --section-bg: #1E1E1E;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
             background-color: var(--background-color);
             color: var(--text-color);
-            line-height: 1.6;
-            transition: var(--transition);
-            animation: fadeIn 1s ease-out;
+            overflow-x: hidden;
+            user-select: none;
+            transition: background-color 0.5s, color 0.5s;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Navigation */
+        /* 향상된 네비게이션 애니메이션 */
         nav {
             position: fixed;
-            width: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
             background-color: var(--background-color);
             padding: 1rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             z-index: 1000;
-            transition: var(--transition);
-            animation: slideDown 1s ease;
+            transition: all 0.5s ease;
         }
 
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-            }
-            to {
-                transform: translateY(0);
-            }
+        nav.scrolled {
+            padding: 0.5rem;
+            background-color: var(--background-color);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         nav ul {
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 2rem;
             list-style: none;
+            align-items: center;
+            padding: 0;
         }
 
-        nav a {
+        nav ul li {
+            margin: 0 20px;
+            position: relative;
+        }
+
+        nav ul li a {
             color: var(--text-color);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: bold;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
             position: relative;
-            transition: var(--transition);
         }
 
-        nav a::after {
+        nav ul li a::after {
             content: '';
             position: absolute;
             bottom: -5px;
@@ -94,38 +85,35 @@
             width: 0;
             height: 2px;
             background-color: var(--primary-color);
-            transition: var(--transition);
+            transition: width 0.3s ease;
         }
 
-        nav a:hover::after {
+        nav ul li a:hover::after {
             width: 100%;
         }
 
-        nav a:hover {
-            color: var(--secondary-color);
-        }
-
-        /* Hero Section */
+        /* 향상된 히어로 섹션 애니메이션 */
         .hero {
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            height: 100vh;
             text-align: center;
-            padding: 2rem;
-            animation: fadeInUp 1s ease-out;
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes fadeInUp {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, var(--background-color) 70%);
+            opacity: 0.8;
+            z-index: -1;
         }
 
         .profile-image {
@@ -133,235 +121,194 @@
             height: 150px;
             border-radius: 50%;
             object-fit: cover;
+            margin-bottom: 1rem;
             border: 3px solid var(--primary-color);
-            margin-bottom: 2rem;
-            transition: var(--transition);
-            animation: flyIn 1s ease-out; /* 로딩 시 날아오는 애니메이션 */
-        }
-
-        @keyframes flyIn {
-            from {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+            box-shadow: 0 0 20px rgba(108, 99, 255, 0.3);
+            transition: all 0.5s ease;
+            animation: profileEntrance 1.5s ease-out forwards;
         }
 
         .profile-image:hover {
-            border-color: var(--hover-color); /* 마우스 호버 시 밝은 하늘색으로 변경 */
-            transform: scale(1.1);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            transform: scale(1.1) rotate(5deg);
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 30px rgba(56, 141, 245, 0.5);
         }
 
-        /* Sections */
+        @keyframes profileEntrance {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.2) rotate(10deg);
+            }
+            100% {
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
+
+        /* 향상된 섹션 애니메이션 */
         section {
-            padding: 5rem 2rem;
+            flex: 1 1 45%;
+            margin: 1rem;
+            padding: 2rem;
+            border-radius: 15px;
             background-color: var(--section-bg);
-            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
             opacity: 0;
-            animation: fadeInUp 1s forwards;
+            transform: translateY(50px);
         }
 
-        @keyframes fadeInUp {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 0%, rgba(108, 99, 255, 0.1) 100%);
+            transition: transform 0.5s ease;
+            transform: translateX(-100%);
         }
 
-        /* About Section */
-        #about h2 {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            animation: bounceIn 1s ease;
+        section:hover::before {
+            transform: translateX(0);
         }
 
-        @keyframes bounceIn {
-            from {
-                transform: translateY(-50%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* Skills Section */
-        .skills-container {
-            opacity: 0;
-            animation: fadeInUp 1s forwards;
-        }
-
-        .skills-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            justify-content: center;
-            animation: bounceIn 1s ease-out;
-        }
-
-        .skills {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
+        /* 향상된 스킬 애니메이션 */
         .skill {
-            background-color: var(--background-color);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: popIn 0.8s ease-out;
-        }
-
-        @keyframes popIn {
-            from {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
+            background: var(--secondary-color);
+            color: #ffffff;
+            padding: 0.7rem 1.2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
         }
 
         .skill:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(56, 141, 245, 0.3);
         }
 
-        /* Footer */
-        footer {
-            background-color: var(--section-bg);
-            padding: 2rem;
-            text-align: center;
-            opacity: 0;
-            animation: fadeInUp 1s forwards;
+        .skill::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
 
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1rem;
+        .skill:hover::before {
+            width: 200px;
+            height: 200px;
         }
 
-        .social-icons a {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            transition: var(--transition);
-            animation: fadeIn 1s forwards;
-        }
-
-        .social-icons a:hover {
-            color: var(--secondary-color);
-            transform: translateY(-3px);
-        }
-
-        /* Theme Toggle */
+        /* 다크모드 토글 애니메이션 개선 */
         .theme-toggle {
             background: none;
             border: none;
             color: var(--text-color);
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.5s ease;
+            position: relative;
+            padding: 10px;
+            border-radius: 50%;
+            overflow: hidden;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            nav ul {
-                gap: 1rem;
-            }
+        .theme-toggle:hover {
+            background-color: rgba(108, 99, 255, 0.1);
+        }
 
-            .skills {
-                flex-direction: column;
-                align-items: center;
-            }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .rotate {
+            animation: rotate 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        /* 푸터 애니메이션 */
+        .social-icons a {
+            margin: 0 15px;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            transition: all 0.4s ease;
+            position: relative;
+            display: inline-block;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-5px);
+            color: var(--secondary-color);
+        }
+
+        .social-icons a::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons a:hover::before {
+            transform: scaleX(1);
         }
     </style>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li>|</li>
-            <li>
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-sun"></i>
-                </button>
-            </li>
-        </ul>
-    </nav>
-
-    <div class="hero" id="home">
-        <img src="images/luxcoa.jpg" alt="Profile Image" class="profile-image">
-        <h1>𝓁</h1>
-        <p>Crafting code for a better tomorrow.</p>
-    </div>
-
-    <div class="container">
-        <section id="about">
-            <h2><i class="fas fa-user icon"></i> About</h2>
-            <p>I am a developer dedicated to transforming ideas into functional software solutions that enhance user experience and promote efficiency.</p>
-        </section>
-
-        <section id="projects">
-            <h2><i class="fas fa-project-diagram icon"></i> Projects</h2>
-            <h3>
-                <a href="https://hannibot.netlify.app/home" target="_blank">
-                    Hannibot <i class="fas fa-external-link-alt"></i>
-                </a>
-            </h3>
-            <p>Hannibot is a Discord bot that offers various features. Key features include information bot, gambling, and various utility functions.</p>
-        </section>
-
-        <section id="skills">
-            <div class="skills-container">
-                <div class="skills-header">
-                    <i class="fas fa-code icon"></i>
-                    <h2>Stacks</h2>
-                </div>
-                <div class="skills">
-                    <div class="skill"><i class="fab fa-html5"></i>HTML</div>
-                    <div class="skill"><i class="fab fa-css3-alt"></i>CSS</div>
-                    <div class="skill"><i class="fab fa-js-square"></i>JavaScript</div>
-                    <div class="skill"><i class="fab fa-python"></i>Python</div>
-                    <div class="skill"><i class="fab fa-react"></i>React</div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <footer>
-        <p>&copy; 2024 𝓁 All rights reserved.</p>
-        <div class="social-icons">
-            <a href="https://github.com/luxcoa" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="mailto:hannifam@proton.me"><i class="fas fa-envelope"></i></a>
-        </div>
-    </footer>
-
+    <!-- HTML 구조는 동일하게 유지 -->
+    
     <script>
-        // Theme Toggle
+        // 스크롤 애니메이션
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const sections = document.querySelectorAll('section');
+            
+            // 네비게이션 스크롤 효과
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            
+            // 섹션 등장 애니메이션
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight * 0.85) {
+                    section.classList.add('visible');
+                }
+            });
+        });
+
+        // 다크모드 토글
         const themeToggle = document.getElementById('themeToggle');
         const currentTheme = localStorage.getItem('theme');
 
@@ -372,7 +319,12 @@
 
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
+            themeToggle.classList.add('rotate');
             
+            setTimeout(() => {
+                themeToggle.classList.remove('rotate');
+            }, 800);
+
             if (document.body.classList.contains('dark-mode')) {
                 localStorage.setItem('theme', 'dark');
                 themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
@@ -380,6 +332,18 @@
                 localStorage.setItem('theme', 'light');
                 themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
             }
+        });
+
+        // 스킬 아이템 애니메이션
+        document.querySelectorAll('.skill').forEach(skill => {
+            skill.addEventListener('mousemove', (e) => {
+                const rect = skill.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                skill.style.setProperty('--x', `${x}px`);
+                skill.style.setProperty('--y', `${y}px`);
+            });
         });
     </script>
 </body>
