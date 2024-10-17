@@ -279,6 +279,180 @@
         .social-icons a:hover::before {
             transform: scaleX(1);
         }
+        /* 타이핑 효과를 위한 스타일 */
+.typing-text {
+    border-right: 2px solid var(--primary-color);
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--primary-color) }
+}
+
+/* 부드러운 등장 효과 */
+.fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s ease forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 아이콘 플로팅 효과 */
+.floating {
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* 스킬 아이콘 회전 효과 */
+.skill i {
+    margin-right: 8px;
+    transition: transform 0.4s ease;
+}
+
+.skill:hover i {
+    animation: skillIconSpin 0.6s ease;
+}
+
+@keyframes skillIconSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 프로젝트 링크 효과 */
+.project-link {
+    position: relative;
+    display: inline-block;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+}
+
+.project-link:hover {
+    transform: translateX(10px);
+}
+
+.project-link i {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.3s ease;
+}
+
+.project-link:hover i {
+    opacity: 1;
+    transform: translateX(5px);
+}
+
+/* 배경 파티클 효과 */
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    background: var(--primary-color);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: particleFloat 15s infinite linear;
+}
+
+@keyframes particleFloat {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-100vh) rotate(360deg); }
+}
+
+/* 섹션 호버 효과 개선 */
+section {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+section:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+// script 태그 내에 다음 스크립트들을 추가해주세요
+
+// 타이핑 효과 적용
+document.addEventListener('DOMContentLoaded', () => {
+    const heroText = document.querySelector('.hero p');
+    heroText.classList.add('typing-text');
+    
+    // 각 섹션에 페이드업 효과 적용
+    document.querySelectorAll('section h2, section p, section .skills').forEach((element, index) => {
+        element.style.animationDelay = `${index * 0.2}s`;
+        element.classList.add('fade-up');
+    });
+    
+    // 아이콘에 플로팅 효과 적용
+    document.querySelectorAll('.icon').forEach(icon => {
+        icon.classList.add('floating');
+    });
+    
+    // 배경 파티클 생성
+    createParticles();
+});
+
+// 배경 파티클 생성 함수
+function createParticles() {
+    const hero = document.querySelector('.hero');
+    const particlesContainer = document.createElement('div');
+    particlesContainer.classList.add('particles');
+    
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // 랜덤 크기와 위치 설정
+        const size = Math.random() * 5 + 2;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.animationDelay = `${Math.random() * 15}s`;
+        
+        particlesContainer.appendChild(particle);
+    }
+    
+    hero.appendChild(particlesContainer);
+}
+
+// 프로젝트 링크 효과 적용
+document.querySelectorAll('.project-link').forEach(link => {
+    link.addEventListener('mouseenter', () => {
+        const icon = link.querySelector('i');
+        icon.style.opacity = '1';
+        icon.style.transform = 'translateX(5px)';
+    });
+    
+    link.addEventListener('mouseleave', () => {
+        const icon = link.querySelector('i');
+        icon.style.opacity = '0';
+        icon.style.transform = 'translateX(-20px)';
+    });
+});
     </style>
 </head>
 <body>
@@ -313,11 +487,11 @@
 
         <section id="projects">
             <h2><i class="fas fa-project-diagram icon"></i> Projects</h2>
-            <h3>
-                <a href="https://hannibot.netlify.app/home" target="_blank">
-                    Hannibot <i class="fas fa-external-link-alt"></i>
-                </a>
-            </h3>
+<h3>
+    <a href="https://hannibot.netlify.app/home" target="_blank" class="project-link">
+        Hannibot <i class="fas fa-external-link-alt"></i>
+    </a>
+</h3>
             <p>Hannibot is a Discord bot that offers various features. Key features include information bot, gambling, and various utility functions.</p>
         </section>
 
