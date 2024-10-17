@@ -13,6 +13,7 @@
             --background-color: #FFFFFF;
             --text-color: #333333;
             --section-bg: #F9F9F9;
+            --hover-color: #7ED6FF; /* 밝은 하늘색 */
             --transition: all 0.3s ease;
         }
 
@@ -113,15 +114,17 @@
             align-items: center;
             text-align: center;
             padding: 2rem;
-            animation: scaleUp 1s ease;
+            animation: fadeInUp 1s ease-out;
         }
 
-        @keyframes scaleUp {
+        @keyframes fadeInUp {
             from {
-                transform: scale(0.9);
+                transform: translateY(20px);
+                opacity: 0;
             }
             to {
-                transform: scale(1);
+                transform: translateY(0);
+                opacity: 1;
             }
         }
 
@@ -133,20 +136,23 @@
             border: 3px solid var(--primary-color);
             margin-bottom: 2rem;
             transition: var(--transition);
-            animation: rotateImage 3s infinite linear;
+            animation: flyIn 1s ease-out; /* 로딩 시 날아오는 애니메이션 */
         }
 
-        @keyframes rotateImage {
+        @keyframes flyIn {
             from {
-                transform: rotate(0deg);
+                transform: translateX(-100%);
+                opacity: 0;
             }
             to {
-                transform: rotate(360deg);
+                transform: translateX(0);
+                opacity: 1;
             }
         }
 
         .profile-image:hover {
-            transform: scale(1.1) rotate(5deg);
+            border-color: var(--hover-color); /* 마우스 호버 시 밝은 하늘색으로 변경 */
+            transform: scale(1.1);
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
         }
 
@@ -175,26 +181,56 @@
             margin: 0 auto;
         }
 
+        /* About Section */
+        #about h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: bounceIn 1s ease;
+        }
+
+        @keyframes bounceIn {
+            from {
+                transform: translateY(-50%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
         /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1.5rem;
+        .skills-container {
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
+        }
+
+        .skills-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+            animation: bounceIn 1s ease-out;
+        }
+
+        .skills {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
             margin-top: 2rem;
         }
 
-        .skill-card {
+        .skill {
             background-color: var(--background-color);
-            padding: 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-            transform: scale(1);
-            animation: popUp 0.5s ease-out;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: popIn 0.8s ease-out;
         }
 
-        @keyframes popUp {
+        @keyframes popIn {
             from {
                 transform: scale(0.8);
                 opacity: 0;
@@ -205,39 +241,9 @@
             }
         }
 
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .skill-card i {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        /* Projects Section */
-        .project-card {
-            background-color: var(--background-color);
-            padding: 2rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .project-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .project-card:hover h3 {
-            color: var(--secondary-color);
-        }
-
-        .project-card i {
-            color: var(--primary-color);
-            margin-left: 0.5rem;
+        .skill:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         /* Footer */
@@ -260,6 +266,7 @@
             color: var(--primary-color);
             font-size: 1.5rem;
             transition: var(--transition);
+            animation: fadeIn 1s forwards;
         }
 
         .social-icons a:hover {
@@ -283,8 +290,9 @@
                 gap: 1rem;
             }
 
-            .skills-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .skills {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
@@ -292,10 +300,11 @@
 <body>
     <nav>
         <ul>
-            <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
-            <li><a href="#projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
-            <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li>|</li>
             <li>
                 <button class="theme-toggle" id="themeToggle">
                     <i class="fas fa-sun"></i>
@@ -312,44 +321,32 @@
 
     <div class="container">
         <section id="about">
-            <h2>About <i class="fas fa-info-circle"></i></h2>
-            <p>I am a developer dedicated to creating efficient and beautiful web applications.</p>
+            <h2><i class="fas fa-user icon"></i> About</h2>
+            <p>I am a developer dedicated to transforming ideas into functional software solutions that enhance user experience and promote efficiency.</p>
         </section>
 
         <section id="projects">
-            <h2>Projects <i class="fas fa-laptop-code"></i></h2>
-            <div class="project-card">
-                <h3>
-                    <a href="https://hannibot.netlify.app/home" target="_blank">
-                        Hannibot <i class="fas fa-external-link-alt"></i>
-                    </a>
-                </h3>
-                <p>Hannibot is a Discord bot that offers various features. Key features include information bot, gambling, and various utility functions.</p>
-            </div>
+            <h2><i class="fas fa-project-diagram icon"></i> Projects</h2>
+            <h3>
+                <a href="https://hannibot.netlify.app/home" target="_blank">
+                    Hannibot <i class="fas fa-external-link-alt"></i>
+                </a>
+            </h3>
+            <p>Hannibot is a Discord bot that offers various features. Key features include information bot, gambling, and various utility functions.</p>
         </section>
 
         <section id="skills">
-            <h2>Skills <i class="fas fa-tools"></i></h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <i class="fab fa-html5"></i>
-                    <h3>HTML</h3>
+            <div class="skills-container">
+                <div class="skills-header">
+                    <i class="fas fa-code icon"></i>
+                    <h2>Stacks</h2>
                 </div>
-                <div class="skill-card">
-                    <i class="fab fa-css3-alt"></i>
-                    <h3>CSS</h3>
-                </div>
-                <div class="skill-card">
-                    <i class="fab fa-js-square"></i>
-                    <h3>JavaScript</h3>
-                </div>
-                <div class="skill-card">
-                    <i class="fab fa-python"></i>
-                    <h3>Python</h3>
-                </div>
-                <div class="skill-card">
-                    <i class="fab fa-react"></i>
-                    <h3>React</h3>
+                <div class="skills">
+                    <div class="skill"><i class="fab fa-html5"></i>HTML</div>
+                    <div class="skill"><i class="fab fa-css3-alt"></i>CSS</div>
+                    <div class="skill"><i class="fab fa-js-square"></i>JavaScript</div>
+                    <div class="skill"><i class="fab fa-python"></i>Python</div>
+                    <div class="skill"><i class="fab fa-react"></i>React</div>
                 </div>
             </div>
         </section>
@@ -382,16 +379,6 @@
             } else {
                 localStorage.setItem('theme', 'light');
                 themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-            }
-        });
-
-        // Scroll Animation
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.style.padding = '0.5rem 1rem';
-            } else {
-                nav.style.padding = '1rem';
             }
         });
     </script>
