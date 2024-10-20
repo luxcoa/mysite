@@ -270,31 +270,29 @@
         .theme-toggle:hover {
             background-color: rgba(108, 99, 255, 0.1);
         }
-            .cursor-light {
-        width: 20px;
-        height: 20px;
-        background: rgba(108, 99, 255, 0.3);
+    .cursor-light {
+        width: 35px;
+        height: 35px;
+        background: rgba(108, 99, 255, 0.15);
         border-radius: 50%;
         position: fixed;
         pointer-events: none;
         z-index: 9999;
-        transition: transform 0.2s ease;
-        backdrop-filter: blur(2px);
-        box-shadow: 0 0 15px rgba(108, 99, 255, 0.5),
-                    inset 0 0 10px rgba(255, 255, 255, 0.5);
+        transition: all 0.15s ease;
+        box-shadow: 0 0 20px rgba(108, 99, 255, 0.3);
     }
 
     .cursor-light.expanded {
-        transform: scale(2.5);
-        background: rgba(108, 99, 255, 0.2);
+        transform: scale(1.5);
+        background: rgba(108, 99, 255, 0.1);
     }
 
     /* 링크나 버튼에 호버했을 때 커서 확장 */
     a:hover ~ .cursor-light,
     button:hover ~ .cursor-light,
     .skill-item:hover ~ .cursor-light {
-        transform: scale(2.5);
-        background: rgba(108, 99, 255, 0.2);
+        transform: scale(1.5);
+        background: rgba(108, 99, 255, 0.1);
     }
     </style>
 </head>
@@ -432,21 +430,17 @@
                 themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
             }
         });
-            // 커서 빛 요소 생성
     const cursorLight = document.createElement('div');
     cursorLight.classList.add('cursor-light');
     document.body.appendChild(cursorLight);
 
-    // 마우스 움직임에 따라 빛 효과 이동
     document.addEventListener('mousemove', (e) => {
-        // 부드러운 애니메이션을 위해 requestAnimationFrame 사용
         requestAnimationFrame(() => {
-            cursorLight.style.left = e.clientX - 10 + 'px';
-            cursorLight.style.top = e.clientY - 10 + 'px';
+            cursorLight.style.left = e.clientX - 17.5 + 'px';  // 중앙 정렬을 위해 크기의 절반만큼 조정
+            cursorLight.style.top = e.clientY - 17.5 + 'px';
         });
     });
 
-    // 클릭할 때 빛 효과 확장
     document.addEventListener('mousedown', () => {
         cursorLight.classList.add('expanded');
     });
@@ -455,7 +449,6 @@
         cursorLight.classList.remove('expanded');
     });
 
-    // 요소에 호버했을 때 빛 효과 확장
     const interactiveElements = document.querySelectorAll('a, button, .skill-item');
     interactiveElements.forEach(element => {
         element.addEventListener('mouseenter', () => {
