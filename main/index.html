@@ -163,26 +163,24 @@
         border-radius: 15px;
         background-color: var(--section-bg);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        text-align: center;
+        text-align: left;
     }
 
     .skills-title {
         color: var(--text-color);
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         font-weight: bold;
         margin-bottom: 2rem;
         display: flex;
         align-items: center;
-        justify-content: center;
         gap: 0.5rem;
     }
 
     .skills-container {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
-        gap: 1.5rem;
-        padding: 1rem;
+        gap: 1rem;
+        padding: 0.5rem 0;
     }
 
     .skill-item {
@@ -190,9 +188,9 @@
         align-items: center;
         gap: 0.8rem;
         padding: 0.75rem 1.5rem;
-        background-color: var(--background-color);
+        background-color: #4195f5;
         border-radius: 50px;
-        color: #388df5;
+        color: white;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
         cursor: pointer;
@@ -200,20 +198,22 @@
 
     .skill-item:hover {
         transform: scale(1.05);
-        background-color: var(--primary-color);
-        color: white;
+        background-color: #3182ce;
     }
 
     .skill-item i {
         font-size: 1.2rem;
+        color: white;
     }
 
-    /* 아이콘 색상 */
-    .html-icon { color: #E34F26; }
-    .css-icon { color: #1572B6; }
-    .js-icon { color: #F7DF1E; }
-    .python-icon { color: #3776AB; }
-    .react-icon { color: #61DAFB; }
+    /* 아이콘도 흰색으로 통일 */
+    .html-icon, 
+    .css-icon, 
+    .js-icon, 
+    .python-icon, 
+    .react-icon { 
+        color: white !important; 
+    }
 
         /* 푸터 스타일 */
         footer {
