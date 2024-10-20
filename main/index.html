@@ -158,18 +158,18 @@
         }
 
     #skills {
-        padding: 2rem;
-        background-color: rgb(32, 33, 36);
-        border-radius: 15px;
         margin: 2rem auto;
+        padding: 2rem;
+        border-radius: 15px;
+        background-color: var(--section-bg);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
-    .skills-title {
-        color: white;
+    #skills h2 {
+        color: var(--text-color);
         font-size: 1.5rem;
         font-weight: bold;
         margin-bottom: 2rem;
-        text-align: center;
     }
 
     .skills-container {
@@ -185,9 +185,9 @@
         align-items: center;
         gap: 0.5rem;
         padding: 0.75rem 1.5rem;
-        background-color: rgb(32, 33, 36);
+        background-color: var(--background-color);
         border-radius: 50px;
-        color: white;
+        color: var(--text-color);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease;
         cursor: pointer;
@@ -195,12 +195,15 @@
 
     .skill-item:hover {
         transform: scale(1.05);
+        background-color: var(--primary-color);
+        color: white;
     }
 
     .skill-item i {
         font-size: 1.2rem;
     }
 
+    /* 아이콘 색상은 유지 */
     .html-icon { color: #E34F26; }
     .css-icon { color: #1572B6; }
     .js-icon { color: #F7DF1E; }
