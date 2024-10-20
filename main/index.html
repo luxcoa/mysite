@@ -271,28 +271,20 @@
             background-color: rgba(108, 99, 255, 0.1);
         }
     .cursor-light {
-        width: 35px;
-        height: 35px;
-        background: rgba(108, 99, 255, 0.15);
+        width: 50px; /* 커서 크기 증가 */
+        height: 50px; /* 커서 크기 증가 */
+        background: rgba(255, 255, 255, 0.8); /* 완전 흰색 빛 */
         border-radius: 50%;
         position: fixed;
         pointer-events: none;
         z-index: 9999;
-        transition: all 0.15s ease;
-        box-shadow: 0 0 20px rgba(108, 99, 255, 0.3);
+        transition: all 0.1s ease; /* 속도 증가 */
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* 흰색 빛 효과 */
     }
 
     .cursor-light.expanded {
         transform: scale(1.5);
-        background: rgba(108, 99, 255, 0.1);
-    }
-
-    /* 링크나 버튼에 호버했을 때 커서 확장 */
-    a:hover ~ .cursor-light,
-    button:hover ~ .cursor-light,
-    .skill-item:hover ~ .cursor-light {
-        transform: scale(1.5);
-        background: rgba(108, 99, 255, 0.1);
+        background: rgba(255, 255, 255, 0.8);
     }
     </style>
 </head>
@@ -436,8 +428,8 @@
 
     document.addEventListener('mousemove', (e) => {
         requestAnimationFrame(() => {
-            cursorLight.style.left = e.clientX - 17.5 + 'px';  // 중앙 정렬을 위해 크기의 절반만큼 조정
-            cursorLight.style.top = e.clientY - 17.5 + 'px';
+            cursorLight.style.left = e.clientX - 25 + 'px';  // 크기의 절반만큼 조정
+            cursorLight.style.top = e.clientY - 25 + 'px';
         });
     });
 
