@@ -280,7 +280,7 @@
         height: 50px; /* 커서 크기 증가 */
         background: rgba(255, 255, 255, 0.8); /* 완전 흰색 빛 */
         border-radius: 50%;
-        position: fixed;
+        position: absolute; /* fixed에서 absolute로 변경 */
         pointer-events: none;
         z-index: 9999;
         transition: all 0.1s ease; /* 속도 증가 */
@@ -427,6 +427,7 @@
                 themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
             }
         });
+
     const cursorLight = document.createElement('div');
     cursorLight.classList.add('cursor-light');
     document.body.appendChild(cursorLight);
