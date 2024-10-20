@@ -33,6 +33,7 @@
             overflow-x: hidden;
             user-select: none;
             transition: background-color 0.5s, color 0.5s;
+            scroll-behavior: smooth;
         }
 
         /* 네비게이션 */
@@ -157,6 +158,27 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
+        /* 스킬 섹션 */
+        #skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill {
+            background-color: var(--background-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .skill:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
         /* 푸터 스타일 */
         footer {
             text-align: center;
@@ -256,6 +278,19 @@
             <p>Hannibot is a Discord bot that offers various features. Key features include information bot, gambling, and various utility functions.</p>
         </section>
 
+        <!-- Skills 섹션 -->
+        <section id="skills">
+            <h2><i class="fas fa-code icon"></i> Skills</h2>
+            <div class="skill-grid">
+                <div class="skill">JavaScript</div>
+                <div class="skill">Python</div>
+                <div class="skill">HTML & CSS</div>
+                <div class="skill">React</div>
+                <div class="skill">Node.js</div>
+                <div class="skill">Git & GitHub</div>
+            </div>
+        </section>
+
     <!-- 푸터 -->
     <footer>
         <p>&copy; 2024 𝓁 All rights reserved.</p>
@@ -323,8 +358,8 @@
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
                 
-                skill.style.setProperty('--x', `${x}px`);
-                skill.style.setProperty('--y', `${y}px`);
+                skill.style.setProperty('--x', ${x}px);
+                skill.style.setProperty('--y', ${y}px);
             });
         });
     </script>
