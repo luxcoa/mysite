@@ -168,12 +168,12 @@
 }
 
 .skill {
-    width: 150px;
-    height: 80px;
+    width: 80px; /* 원의 크기 */
+    height: 80px; /* 원의 크기 */
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50px; /* 동그랗게, 납작한 스타일 */
+    border-radius: 50%; /* 완전한 원 */
     background-color: var(--primary-color);
     color: white;
     font-size: 1rem;
@@ -181,7 +181,6 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, background-color 0.3s ease;
     text-align: center;
-    padding: 10px;
 }
 
 .skill:hover {
